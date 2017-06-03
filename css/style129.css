@@ -420,11 +420,10 @@ div.note {
 #recent {
     border: #ACB2B9 1px solid;
     border-radius: 10px;
-    color: #ACB2B9;
+    color: #686f75;
     margin: 20px auto;
     padding: 10px;
-    text-align: center;
-    font-size: 10px;
+    font-size: 15px;
     width: 90%
 }
 #recent>a {
@@ -433,7 +432,7 @@ div.note {
 div.results {
     background-color: #F5DFD6;
     border-radius: 10px 10px 10px 10px;
-    margin: 20px 0;
+    margin: 2px 0;
     min-height: 37px;
 }
 div.results>div {
@@ -453,7 +452,7 @@ div.results>dl {
     background-color: #fff;
     border-bottom: solid 1px #F5DFD6;
     display: block;
-    padding: 4px 0
+    padding: 2px 0
 }
 div.results>dl>dd {
     display: block;
