@@ -1,12 +1,26 @@
 <?php
 
+
+
 if (isset($_GET["q"])) {
     $key = $_GET["q"];
 }
 if (isset($_GET["m"])) {
     $method = $_GET["m"];
 }
-$servername = "localhost";
+
+if (isset($_GET["w"])) {//word
+    $word = $_GET["w"];
+}
+if (isset($_GET["a"])) {//arthaya
+    $meaning = $_GET["a"];
+}
+if (isset($_GET["e"])) {//example
+    $example = $_GET["e"];
+}
+$file =fopen("servername.txt", "r") or die("Unable to open file!");
+$servername = fgets($file);
+fclose($file);
 $username = "root";
 $password = "1234";
 $dbname = "aruth";
@@ -14,20 +28,21 @@ $dbname = "aruth";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
-
+$conn->set_charset("utf8");
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
 if ($method == "meaning") {
-    $sql = "SELECT meaning FROM meaning inner join synonym where word = '$key'";
+    $sql = "SELECT meaning,example FROM meaning inner join word on word.id = meaning.wordid where word = '$key'";
     $result = $conn->query($sql);
 //$numRows = mysqli_num_rows($result);
 
     $rows = array();
     while ($r = mysqli_fetch_assoc($result)) {
         $rows[] = $r['meaning'];
+        $rows[] = $r['example'];
     }
 
     $json = json_encode($rows);
@@ -46,6 +61,22 @@ if ($method == "synonym") {
 
     $json = json_encode($rows);
     echo $json;
+}
+if ($method == "addWord") {
+    $sqlword = "insert into word (word,time) values ('$word', NOW())";
+
+
+    if ($conn->query($sqlword) === TRUE) {
+        $wordid = $conn->insert_id;
+        $sqlmeaning = "insert into meaning (wordid, meaning, example, time) values ('$wordid','$meaning', '$example', NOW())";
+        if ($conn->query($sqlmeaning) === TRUE) {
+            echo "New word added successfully";
+        } else {
+            echo "Error: " . $sqlmeaning . "<br>" . $conn->error;
+        }
+    } else {
+        echo "Error: " . $sqlword . "<br>" . $conn->error;
+    }
 }
 ?>
 

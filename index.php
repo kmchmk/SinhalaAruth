@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <?php
-$thisURL = "http://localhost/SinhalaAruth/index.php";
-$requestURl = "http://localhost/SinhalaAruth/request.php";
-$key="";
-if(isset($_GET['q'])){
+$file = fopen("config.txt", "r") or die("Unable to open file!");
+$path = fgets($file);
+fclose($file);
+
+
+$thisURL = "http://" . $path . "/index.php";
+$requestURl = "http://" . $path . "/request.php";
+$addURL = "http://" . $path . "/add.php";
+$key = "";
+if (isset($_GET['q'])) {
     $key = $_GET['q'];
 }
 ?>
@@ -18,92 +24,83 @@ if(isset($_GET['q'])){
     <body data-gr-c-s-loaded="true">
         <div id="wrap">
             <div id="top">
-                <h1>
-                    <a href=<?php echo $thisURL;?> title="Torrents Search">සිංහල<sup>අරුත්</sup></a>
-                </h1>
+                <h1><a href=<?php echo $thisURL; ?> title="සිංහල වචන සොයන්න">සිංහල<sup>අරුත්</sup></a></h1>
                 <ul>
-                    <li>
-                        <a href="https://torrentz2.eu/search" title="Torrent Search">සියල්ල</a>
-                    </li>
-                    <li>
-                        <a href="https://torrentz2.eu/help" title="Get Help">උදව්</a>
-                    </li>
+                    <li><a href=<?php echo $addURL; ?> title="වචන ඇතුලත් කරන්න">අළුත්</a></li>
+                    <li><a href="https://torrentz2.eu/help" title="Get Help">උදව්</a></li>
                 </ul>
             </div>
-            <form action=<?php echo $thisURL;?> method="get" class="search" id="search">
+            <form action=<?php echo $thisURL; ?> method="get" class="search" id="search">
                 <fieldset>
-                    <input type="text" name="q" value="<?php echo $key;?>" id="thesearchbox" autocomplete="off" autofocus="">
-                    <ul class="autocomplete" style="top: 119px; left: 84.5px; width: 909px;">
-                    </ul>
+                    <input required type="search" name="q" value="<?php echo $key; ?>" id="thesearchbox" placeholder="වචනයක් ඇතුලත් කරන්න.">
                     <input type="submit" id="thesearchbutton" value="සොයන්න">
                 </fieldset>
             </form>
+
+
+            <?php
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => $requestURl . "?m=meaning&q=" . $key,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 30,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "GET",
+                CURLOPT_HTTPHEADER => array(
+                    "cache-control: no-cache"
+                ),
+            ));
+
+            $response = curl_exec($curl);
+            $result = json_decode($response);
+            $err = curl_error($curl);
+            curl_close($curl);
+
+            if (sizeof($result) > 0) {
+                echo '<div class="SemiAcceptableAds"><h3>තේරුම</h3><div id="recent">';
+                echo $result[0];
+                echo '</div></div>';
+                echo '<div class="SemiAcceptableAds"><h3>උදාහරණ</h3><div id="recent">';
+                echo $result[1];
+                echo '</div></div>';
+            }
+            ?>
+
             <div class="SemiAcceptableAds">
-                <h3>තේරුම</h3>
-                <div id="recent">
-                    <?php
-                    $curl = curl_init();
-                            curl_setopt_array($curl, array(
-                                CURLOPT_URL => $requestURl."?m=meaning&q=".$key,
-                                CURLOPT_RETURNTRANSFER => true,
-                                CURLOPT_ENCODING => "",
-                                CURLOPT_MAXREDIRS => 10,
-                                CURLOPT_TIMEOUT => 30,
-                                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                                CURLOPT_CUSTOMREQUEST => "GET",
-                                CURLOPT_HTTPHEADER => array(
-                                    "cache-control: no-cache"
-                                ),
-                            ));
 
-                            $response = curl_exec($curl);
-                            $result = json_decode($response);
-                            $err = curl_error($curl);
-                            curl_close($curl);
 
-                    if (sizeof($result)>0){
-                        echo $result[0];
-                        
-                    }
-                    else{
-                        echo "වචනයක් ඇතුලත් කරන්න..";
-                    }
+
+                <?php
+//                    $curl = curl_init();
+//                    curl_setopt_array($curl, array(
+//                        CURLOPT_URL => $requestURl . "?m=synonym&q=" . $key,
+//                        CURLOPT_RETURNTRANSFER => true,
+//                        CURLOPT_ENCODING => "",
+//                        CURLOPT_MAXREDIRS => 10,
+//                        CURLOPT_TIMEOUT => 30,
+//                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+//                        CURLOPT_CUSTOMREQUEST => "GET",
+//                        CURLOPT_HTTPHEADER => array(
+//                            "cache-control: no-cache"
+//                        ),
+//                    ));
+//
+//                    $response = curl_exec($curl);
+//                    $result = json_decode($response);
+//                    $err = curl_error($curl);
+//                    curl_close($curl);
+//echo '<h3>සමාන පද</h3>';
+//                echo '<div class="results">';
+//                    for ($i = 0; $i < sizeof($result); $i++) {
+//                        echo '<dl><dt><a href="put something">' . $result[$i] . '</a></dt></dl>';
+//                    }
+//                echo '<p></p>';
+//                echo '</div>';
                 ?>
-                </div>
 
-            </div>
-            <div class="SemiAcceptableAds">
-                <h3>සමාන පද</h3>
-                <div class="results">
-                    
-                    
-                    <?php
-                    $curl = curl_init();
-                            curl_setopt_array($curl, array(
-                                CURLOPT_URL => $requestURl."?m=synonym&q=".$key,
-                                CURLOPT_RETURNTRANSFER => true,
-                                CURLOPT_ENCODING => "",
-                                CURLOPT_MAXREDIRS => 10,
-                                CURLOPT_TIMEOUT => 30,
-                                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                                CURLOPT_CUSTOMREQUEST => "GET",
-                                CURLOPT_HTTPHEADER => array(
-                                    "cache-control: no-cache"
-                                ),
-                            ));
 
-                            $response = curl_exec($curl);
-                            $result = json_decode($response);
-                            $err = curl_error($curl);
-                            curl_close($curl);
-
-                    for($i =0;$i<sizeof($result);$i++){
-                        echo '<dl><dt><a href="put something">'.$result[$i].'</a></dt></dl>';
-                    }
-                ?>
-                    
-                    <p></p>
-                </div>
                 <p class="generic">අරුත් යනු සිංහල වචනවල තේරුම් බලා ගතහැකි ශබ්ද කෝෂයකි.</p>
                 <p class="generic">ඕනෑම සිංහල වචනයක සරල අර්ථය මෙහි විස්තර කර ඇත.</p>
                 <p class="generic">

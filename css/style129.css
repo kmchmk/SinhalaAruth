@@ -836,13 +836,43 @@ form.search {
     margin: 20px 0
 }
 form.search #thesearchbox {
-    background: #ffffff url("/img/zoom.png") no-repeat scroll 98% 50%;
+    background: #ffffff  no-repeat scroll 98% 50%;
     border: 0 none;
     border-radius: 5px;
     font-size: 18px;
     margin: 0;
     padding: 4px;
     width: 77%;
+    outline: none;
+}
+form.search #themeaningbox {
+    background: #ffffff  no-repeat scroll 98% 50%;
+    border: 1;
+    border-radius: 5px;
+    font-size: 18px;
+    margin: 0;
+    padding: 4px;
+    width: 99%;
+    outline: none;
+}
+form.search #thewordbox {
+    background: #ffffff  no-repeat scroll 98% 50%;
+    border: 1;
+    border-radius: 5px;
+    font-size: 18px;
+    margin: 0;
+    padding: 4px;
+    width: 99%;
+    outline: none;
+}
+form.search #theexamplebox {
+    background: #ffffff  no-repeat scroll 98% 50%;
+    border: 1;
+    border-radius: 5px;
+    font-size: 18px;
+    margin: 0;
+    padding: 4px;
+    width: 99%;
     outline: none;
 }
 form.search #thesearchbutton {
@@ -1638,6 +1668,18 @@ div.mctitle a {
     }
     form.search #thesearchbox {
         width: 70%;
+        font-size: 21px;
+    }
+    form.search #themeaningbox {
+        width: 98%;
+        font-size: 21px;
+    }
+        form.search #thewordbox {
+        width: 98%;
+        font-size: 21px;
+    }
+        form.search #theexamplebox {
+        width: 98%;
         font-size: 21px;
     }
     #votebox,
