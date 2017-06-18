@@ -835,6 +835,16 @@ form.search {
     display: block;
     margin: 20px 0
 }
+form.search #thesinglishbox {
+    background: #ffffff  no-repeat scroll 98% 50%;
+    border: 0 none;
+    border-radius: 5px;
+    font-size: 18px;
+    margin: 0;
+    padding: 4px;
+    width: 99%;
+    outline: none;
+}
 form.search #thesearchbox {
     background: #ffffff  no-repeat scroll 98% 50%;
     border: 0 none;
@@ -1666,6 +1676,10 @@ div.mctitle a {
         margin: 0 0 0 10px;
         width: 75px;
     }
+    form.search #thesinglishbox {
+        width: 98%;
+        font-size: 21px;
+    }
     form.search #thesearchbox {
         width: 70%;
         font-size: 21px;
@@ -1674,11 +1688,11 @@ div.mctitle a {
         width: 98%;
         font-size: 21px;
     }
-        form.search #thewordbox {
+    form.search #thewordbox {
         width: 98%;
         font-size: 21px;
     }
-        form.search #theexamplebox {
+    form.search #theexamplebox {
         width: 98%;
         font-size: 21px;
     }

@@ -70,7 +70,7 @@ if ($method == "addWord") {
         $wordid = $conn->insert_id;
         $sqlmeaning = "insert into meaning (wordid, meaning, example, time) values ('$wordid','$meaning', '$example', NOW())";
         if ($conn->query($sqlmeaning) === TRUE) {
-            echo "New word added successfully";
+            echo "ඔබ විසින් සාර්ථකව වචනයක් ඇතුලත් කරන ලදී.";
         } else {
             echo "Error: " . $sqlmeaning . "<br>" . $conn->error;
         }

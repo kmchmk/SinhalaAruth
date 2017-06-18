@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <?php
-
-$file =fopen("config.txt", "r") or die("Unable to open file!");
+$file = fopen("config.txt", "r") or die("Unable to open file!");
 $path = fgets($file);
 fclose($file);
 
-$thisURL = "http://".$path."/index.php";
-$requestURl = "http://".$path."/request.php";
-$addURL = "http://".$path."/add.php";
+$thisURL = "http://" . $path . "/index.php";
+$requestURl = "http://" . $path . "/request.php";
+$addURL = "http://" . $path . "/add.php";
+$helpURL = "http://" . $path . "/help.php";
 ?>
 <html lang="en" class="gr__torrentz2_eu">
     <head>
@@ -22,29 +22,25 @@ $addURL = "http://".$path."/add.php";
             <div id="top">
                 <h1><a href=<?php echo $thisURL; ?> title="සිංහල වචන සොයන්න">සිංහල<sup>අරුත්</sup></a></h1>
                 <ul>
-                    <li><a href=<?php echo $addURL; ?> title="වචන ඇතුලත් කරන්න">අළුත්</a></li>
-                    <li><a href="https://torrentz2.eu/help" title="Get Help">උදව්</a></li>
+                    <li><a href=<?php echo $helpURL; ?> title="වැඩි විස්තර සඳහා">උදව්</a></li>
                 </ul>
             </div>
-            <form class="search" id="search">
+            <form action="javascript:addWord();" class="search" id="search">
                 <fieldset>
-                    <input required type="text" id="thewordbox" placeholder="Enter word here.">
+                    <input required type="text" id="thewordbox" placeholder="නව වචනයක් ඇතුලත් කරන්න..." >
                 </fieldset>
                 <fieldset>
-                    <textarea required rows=3  type="text" id="themeaningbox" placeholder="Enter meaning here."></textarea>
-                </fieldset>
-                <fieldset></fieldset>
-                <fieldset>
-                    <textarea required rows=3 type="text" id="theexamplebox" placeholder="Enter example here."></textarea>
+                    <textarea required rows=3  type="text" id="themeaningbox" placeholder="තේරුම ඇතුළත් කරන්න..."></textarea>
                 </fieldset>
                 <fieldset></fieldset>
                 <fieldset>
-                    <input type="submit" onclick="addWord()" id="themeaningbox" value="Enter">
-                    <!--<input type"submit" onclick="addWord()" id="themeaningbox">Enter>-->
+                    <textarea required rows=3 type="text" id="theexamplebox" placeholder="උදාහරණයක් ඇතුලත් කරන්න..."></textarea>
                 </fieldset>
-                <!--                <fieldset>
-                                    <input type="submit" value="Enter" id="themeaningbox" onclick="addWord()">
-                                </fieldset>-->
+                <fieldset></fieldset>
+                <fieldset>
+                    <input type="submit" id="themeaningbox" value="හරි">
+                </fieldset>
+                <fieldset></fieldset>
                 <script>
                     function addWord() {
                         var w = document.getElementById("thewordbox").value;
@@ -58,6 +54,7 @@ $addURL = "http://".$path."/add.php";
                         xmlHttp.send();
                         var message = xmlHttp.responseText;
                         alert(message);
+                        document.forms['search'].reset();
                     }
                 </script>
             </form>
