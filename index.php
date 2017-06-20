@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <?php
 $file = fopen("config.txt", "r") or die("Unable to open file!");
 $path = fgets($file);
@@ -32,12 +32,10 @@ if (isset($_GET['q'])) {
                 </ul>
             </div>
             
-            <form class="search" id="search">
+            <form action=<?php echo $thisURL; ?> method="get" class="search" id="search">
             <fieldset>
                 <input type="text" id="thesinglishbox" onkeyup="convert()" placeholder="සිංහල/English">
             </fieldset>
-            </form>
-            <form action=<?php echo $thisURL; ?> method="get" class="search" id="search">
                 <fieldset>
                     <input required type="search" name="q" value="<?php echo $key; ?>" id="thesearchbox" placeholder="වචනයක් ඇතුලත් කරන්න.">
                     <input type="submit" id="thesearchbutton" value="සොයන්න">
@@ -72,7 +70,16 @@ if (isset($_GET['q'])) {
                 echo '<div class="SemiAcceptableAds"><h3>උදාහරණ</h3><div id="recent">';
                 echo $result[1];
                 echo '</div></div>';
-            } else {
+            } else if($key){
+	
+                echo '<div class="SemiAcceptableAds">';
+                echo '<p class="generic"><b>"'.$key.'"</b> යන වචනය  සඳහා තේරුම ඇතුලත් කර නොමැත. හැකිනම් ඇතුලත් කරන්න. </p>';
+                echo '</div>';
+	
+	include('./shared/insert_form.php');
+	
+	}            
+	else{
                 echo '<div class="SemiAcceptableAds">';
                 echo '<p class="generic"><b>අරුත්</b> යනු සිංහල වචනවල තේරුම් බලා ගතහැකි ශබ්දකෝෂයකි.</p>';
                 echo '<p class="generic">ඕනෑම සිංහල වචනයක සරල අර්ථය මෙහි විස්තර කර ඇත.</p>';
@@ -87,7 +94,7 @@ if (isset($_GET['q'])) {
                     </a> | <a href="http://dictionary.cambridge.org/" target="_blank">ඉංග්‍රීසි-ඉංග්‍රීසි<img  src="img/cutehamster.gif" title="Hi! search something" alt=""></a>
                 </p>
                 <div id="footer">
-                    <br>
+                    <br> 
                 </div>
             </div> 
         </div>
