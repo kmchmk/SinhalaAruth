@@ -29,7 +29,7 @@ $helpURL = "http://" . $path . "/help.php";
             <div class="help">
                 <p><b>Android Application</b></p>
                 <ol>
-                    <li><b>සිංහල අරුත්</b> ශබ්දකෝෂයේ   <a href="https://www.dropbox.com/s/jqifqm3up8muwpr/%E0%B6%85%E0%B6%BB%E0%B7%94%E0%B6%AD%E0%B7%8A_1.0.apk?dl=0" target="_blank">android යෙදුම</a> ඔබට ලබාගත හැක.</li>
+                    <li><b>සිංහල අරුත්</b> ශබ්දකෝෂයේ   <a href="https://www.dropbox.com/sh/6wrgdm25jqetjg9/AAC_BSQOqJhUI3ur0Eyfez8Ga?dl=0" target="_blank">android යෙදුම</a> ඔබට ලබාගත හැක.</li>
                     <li> සෑම විටම යෙදුම යාවත්කාලීන කොට තබාගන්න..</li>
                 </ol>
                 <p><b>වචන ඇතුලත් කිරීම</b></p>

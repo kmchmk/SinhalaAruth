@@ -31,7 +31,7 @@ if (isset($_GET['q'])) {
                     <li><a href=<?php echo $helpURL; ?> title="වැඩි විස්තර සඳහා">උදව්</a></li>
                 </ul>
             </div>
-
+            Please update this application. <a href="https://www.dropbox.com/sh/6wrgdm25jqetjg9/AAC_BSQOqJhUI3ur0Eyfez8Ga?dl=0"><u>Download</u></a>
             <form action=<?php echo $thisURL; ?> method="get" class="search" id="search">
                 <fieldset>
                     <input type="text" id="thesinglishbox" onkeyup="convert()" placeholder="සිංහල/English">
