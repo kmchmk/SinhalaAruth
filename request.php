@@ -63,9 +63,13 @@ if ($method == "synonym") {
     echo $json;
 }
 if ($method == "addWord") {
-    $sqlword = "insert into word (word,time) values ('$word', NOW())";
-
-
+    
+//    'INSERT INTO `tags` (`tag`) VALUES ('myvalue1')
+//  ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), `tag`='myvalue1';
+//SELECT LAST_INSERT_ID();'
+//    
+    
+    $sqlword = "insert into word (word,time) values ('$word', NOW()) ON DUPLICATE KEY UPDATE id = LAST_INSERT_ID(id)";
     if ($conn->query($sqlword) === TRUE) {
         $wordid = $conn->insert_id;
         $sqlmeaning = "insert into meaning (wordid, meaning, example, time) values ('$wordid','$meaning', '$example', NOW())";

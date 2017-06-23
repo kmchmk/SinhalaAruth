@@ -420,7 +420,7 @@ div.note {
 #recent {
     border: #ACB2B9 1px solid;
     border-radius: 10px;
-    color: #686f75;
+    color: #001f3d;
     margin: 20px auto;
     padding: 10px;
     font-size: 15px;
@@ -898,6 +898,19 @@ form.search #thesearchbutton {
     padding: 0;
     width: 20%;
 }
+div.SemiAcceptableAds #thefeedbackbutton {
+    background-color: #ccffcc;
+    border-radius: 5px;
+    color: #6666ff;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 700;
+    height: 20px;
+    margin: 0 0 0 1.5%;
+    width: 10%;
+    float: right;
+}
+
 form.search>fieldset {
     border: none;
     display: block;
@@ -1676,6 +1689,9 @@ div.mctitle a {
         margin: 0 0 0 10px;
         width: 75px;
     }
+    div.SemiAcceptableAds #thefeedbackbutton {
+        width: 15%;
+    }
     form.search #thesinglishbox {
         width: 98%;
         font-size: 21px;
@@ -1773,6 +1789,9 @@ div.mctitle a {
         font-size: 12px;
     }
     form.search #thesearchbutton {
+        width: 18%;
+    }
+    div.SemiAcceptableAds #thefeedbackbutton {
         width: 18%;
     }
     #votebox,

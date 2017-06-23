@@ -31,16 +31,16 @@ if (isset($_GET['q'])) {
                     <li><a href=<?php echo $helpURL; ?> title="වැඩි විස්තර සඳහා">උදව්</a></li>
                 </ul>
             </div>
-            
-            <form class="search" id="search">
-            <fieldset>
-                <input type="text" id="thesinglishbox" onkeyup="convert()" placeholder="සිංහල/English">
-            </fieldset>
-            </form>
+
             <form action=<?php echo $thisURL; ?> method="get" class="search" id="search">
+                <fieldset>
+                    <input type="text" id="thesinglishbox" onkeyup="convert()" placeholder="සිංහල/English">
+                </fieldset>
                 <fieldset>
                     <input required type="search" name="q" value="<?php echo $key; ?>" id="thesearchbox" placeholder="වචනයක් ඇතුලත් කරන්න.">
                     <input type="submit" id="thesearchbutton" value="සොයන්න">
+<!--                    <input type=submit id="thefeedbackbutton" value="Up">
+                    <input type=submit id="thefeedbackbutton" value="Down">-->
                 </fieldset>
             </form>
 
@@ -66,12 +66,25 @@ if (isset($_GET['q'])) {
             curl_close($curl);
 
             if (sizeof($result) > 0) {
-                echo '<div class="SemiAcceptableAds"><h3>තේරුම</h3><div id="recent">';
-                echo $result[0];
-                echo '</div></div>';
-                echo '<div class="SemiAcceptableAds"><h3>උදාහරණ</h3><div id="recent">';
-                echo $result[1];
-                echo '</div></div>';
+                echo 'මෙම "හරි", "වැරදි" බට්න් තවම ක්‍රියාකාරී මට්ටමේ නැත.';
+                for ($i = 0; $i < sizeof($result); $i+=2) {
+                    echo '<div class="SemiAcceptableAds"><h3>තේරුම ' . ($i + 2) / 2 . '</h3><div id="recent">';
+                    echo $result[$i];
+                    echo '<input type=submit id="thefeedbackbutton" value="වැරදියි">';
+                    echo '<input type=submit id="thefeedbackbutton" value="හරි">';
+                    echo '</div></div>';
+                    //echo '<div class="SemiAcceptableAds"><h3>උදා:</h3>';
+                    echo '<div id="recent">';
+                    echo '<h3>උදා: </h3>' . $result[$i + 1];
+                    echo '</div>';
+                    //echo '</div>';
+                }
+            } else if ($key) {
+
+                echo '<div class="SemiAcceptableAds">';
+                echo '<p class="generic">ඔබ ඇතුළත් කළ<b> "' . $key . '" </b>යන වචනයෙහි අර්ථය අපට සොයාගත නොහැකි විය. කරුණාකර හැකිනම් ඇතුළත් කරන්න.</p>';
+                echo '</div>';
+                include('./addForm.php');
             } else {
                 echo '<div class="SemiAcceptableAds">';
                 echo '<p class="generic"><b>අරුත්</b> යනු සිංහල වචනවල තේරුම් බලා ගතහැකි ශබ්දකෝෂයකි.</p>';
