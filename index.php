@@ -67,15 +67,17 @@ if (isset($_GET['q'])) {
 
             if (sizeof($result) > 0) {
                 echo 'මෙම "හරි", "වැරදි" බට්න් තවම ක්‍රියාකාරී මට්ටමේ නැත.';
-                for ($i = 0; $i < sizeof($result); $i+=2) {
-                    echo '<div class="SemiAcceptableAds"><h3>තේරුම ' . ($i + 2) / 2 . '</h3><div id="recent">';
-                    echo $result[$i];
-                    echo '<input type=submit id="thefeedbackbutton" value="වැරදියි">';
-                    echo '<input type=submit id="thefeedbackbutton" value="හරි">';
+                for ($i = 0; $i < sizeof($result); $i+=3) {
+                    echo '<div class="SemiAcceptableAds"><h3>තේරුම ' . ($i + 3) / 3;
+                    echo '<input type=submit id="thefeedbackbutton" value = "Report" onclick="report(\'' . $result[$i] . '\')">';
+                    echo '</h3><div id="recent">';
+                    echo $result[$i + 1];
+                    echo '<input type=submit id="thefeedbackbutton" value="වැරදියි" onclick="votedown(\'' . $result[$i] . '\')">';
+                    echo '<input type=submit id="thefeedbackbutton" value="හරි" onclick="voteup(\'' . $result[$i] . '\')">';
                     echo '</div></div>';
                     //echo '<div class="SemiAcceptableAds"><h3>උදා:</h3>';
                     echo '<div id="recent">';
-                    echo '<h3>උදා: </h3>' . $result[$i + 1];
+                    echo '<h3>උදා: </h3>' . $result[$i + 2];
                     echo '</div>';
                     //echo '</div>';
                 }
@@ -92,7 +94,34 @@ if (isset($_GET['q'])) {
                 echo '</div>';
             }
             ?>
-
+            <script>
+                function report(recordid) {
+                    if (confirm("ඔබට මෙම තේරුම වාර්තා කිරීමට අවශ්‍යද?")) {
+                        var url = "<?php echo $requestURl; ?>" + "?m=reportMeaning&r=" + recordid;
+                        var xmlHttp = new XMLHttpRequest();
+                        xmlHttp.open("GET", url, false);
+                        xmlHttp.send();
+                        var message = xmlHttp.responseText;
+                        alert(message);
+                    }
+                }
+                function voteup(recordid) {
+                    var url = "<?php echo $requestURl; ?>" + "?m=voteup&r=" + recordid;
+                    var xmlHttp = new XMLHttpRequest();
+                    xmlHttp.open("GET", url, false);
+                    xmlHttp.send();
+                    var message = xmlHttp.responseText;
+                    alert(message);
+                }
+                function votedown(recordid) {
+                    var url = "<?php echo $requestURl; ?>" + "?m=votedown&r=" + recordid;
+                    var xmlHttp = new XMLHttpRequest();
+                    xmlHttp.open("GET", url, false);
+                    xmlHttp.send();
+                    var message = xmlHttp.responseText;
+                    alert(message);
+                }
+            </script>
             <div class="SemiAcceptableAds">
                 <p class="generic">
                     <a href="http://maduraonline.com/" target="_blank">සිංහල-ඉංග්‍රීසි<img  src="img/cutehamster.gif" title="Hi! search something" alt="">

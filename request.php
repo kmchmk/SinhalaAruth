@@ -1,7 +1,5 @@
 <?php
 
-
-
 if (isset($_GET["q"])) {
     $key = $_GET["q"];
 }
@@ -18,7 +16,10 @@ if (isset($_GET["a"])) {//arthaya
 if (isset($_GET["e"])) {//example
     $example = $_GET["e"];
 }
-$file =fopen("servername.txt", "r") or die("Unable to open file!");
+if (isset($_GET["r"])) {//example
+    $recordid = $_GET["r"];
+}
+$file = fopen("servername.txt", "r") or die("Unable to open file!");
 $servername = fgets($file);
 fclose($file);
 $username = "root";
@@ -35,12 +36,13 @@ if ($conn->connect_error) {
 }
 
 if ($method == "meaning") {
-    $sql = "SELECT meaning,example FROM meaning inner join word on word.id = meaning.wordid where word = '$key'";
+    $sql = "SELECT meaning.id, meaning, example FROM meaning inner join word on word.id = meaning.wordid where word = '$key' and report = 0";
     $result = $conn->query($sql);
 //$numRows = mysqli_num_rows($result);
 
     $rows = array();
     while ($r = mysqli_fetch_assoc($result)) {
+        $rows[] = $r['id'];
         $rows[] = $r['meaning'];
         $rows[] = $r['example'];
     }
@@ -63,12 +65,6 @@ if ($method == "synonym") {
     echo $json;
 }
 if ($method == "addWord") {
-    
-//    'INSERT INTO `tags` (`tag`) VALUES ('myvalue1')
-//  ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), `tag`='myvalue1';
-//SELECT LAST_INSERT_ID();'
-//    
-    
     $sqlword = "insert into word (word,time) values ('$word', NOW()) ON DUPLICATE KEY UPDATE id = LAST_INSERT_ID(id)";
     if ($conn->query($sqlword) === TRUE) {
         $wordid = $conn->insert_id;
@@ -82,5 +78,30 @@ if ($method == "addWord") {
         echo "Error: " . $sqlword . "<br>" . $conn->error;
     }
 }
+if ($method == "reportMeaning") {
+    $sqlword = "update meaning set report = 1 where id = ".$recordid.";";
+    if ($conn->query($sqlword) === TRUE) {
+        echo 'ඔබගේ වාර්තාව ලබාදෙන ලදී.';
+    } else {
+        echo "Error: " . $sqlword . "<br>" . $conn->error;
+    }
+}
+if ($method == "voteup") {
+    $sqlword = "update meaning set up = up + 1 where id = ".$recordid.";";
+    if ($conn->query($sqlword) === TRUE) {
+        echo 'ස්තුතියි!';
+    } else {
+        echo "Error: " . $sqlword . "<br>" . $conn->error;
+    }
+}
+if ($method == "votedown") {
+    $sqlword = "update meaning set down = down + 1 where id = ".$recordid.";";
+    if ($conn->query($sqlword) === TRUE) {
+        echo 'ස්තූතියි!';
+    } else {
+        echo "Error: " . $sqlword . "<br>" . $conn->error;
+    }
+}
+
 ?>
 
