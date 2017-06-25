@@ -15,7 +15,7 @@ if (isset($_GET["q"])) {
 
 
 
-if ($method == "meaning") {
+//if ($method == "meaning") {
     $curl = curl_init();
     curl_setopt_array($curl, array(
         CURLOPT_URL => $requestURl . "?m=meaning&q=" . $key,
@@ -55,14 +55,9 @@ if ($method == "meaning") {
     curl_close($curl);
 //echo $jsonObj;
     echo json_encode($jsonObj);
-}
+//}
 
 
-if($method=="voteup"){
-    
-    
-    
-}
 
 
 ?>
