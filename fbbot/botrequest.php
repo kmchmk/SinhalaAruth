@@ -1,6 +1,6 @@
 <?php
 
-$file = fopen("config.txt", "r") or die("Unable to open file!");
+$file = fopen(__DIR__ . '/../config.txt', "r") or die("Unable to open file!");
 $path = fgets($file);
 fclose($file);
 
@@ -76,7 +76,7 @@ if ($method == "voteup") {
     $values->msg = $response;
     $jsonObj = new stdClass();
     $jsonObj->option = "done";
-    if($response=="error"){
+    if ($response == "error") {
         $jsonObj->option = "error";
     }
     $jsonObj->values = $values;
@@ -103,7 +103,7 @@ if ($method == "votedown") {
     $values->msg = $response;
     $jsonObj = new stdClass();
     $jsonObj->option = "done";
-        if($response=="error"){
+    if ($response == "error") {
         $jsonObj->option = "error";
     }
     $jsonObj->values = $values;
@@ -131,7 +131,7 @@ if ($method == "reportMeaning") {
     $values->msg = $response;
     $jsonObj = new stdClass();
     $jsonObj->option = "done";
-        if($response=="error"){
+    if ($response == "error") {
         $jsonObj->option = "error";
     }
     $jsonObj->values = $values;
