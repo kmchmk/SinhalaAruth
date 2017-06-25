@@ -114,7 +114,7 @@ if (isset($_GET['q'])) {
                         downbutton.disabled = false;
                         downbutton.innerHTML = 'වැරදියි (' + downbutton.value + ')';
 
-                        var url = "<?php echo $requestURl; ?>" + "?m=votedown&sign=minus&r=" + recordid;
+                        var url = "<?php echo $requestURl; ?>" + "?m=votedown&s=minus&r=" + recordid;
                         var xmlHttp = new XMLHttpRequest();
                         xmlHttp.open("GET", url, false);
                         xmlHttp.send();
@@ -124,7 +124,7 @@ if (isset($_GET['q'])) {
                     upbutton.innerHTML = 'හරි (' + (parseInt(upbutton.value) + 1) + ')';
                     upbutton.disabled = true;
 
-                    var url = "<?php echo $requestURl; ?>" + "?m=voteup&sign=plus&r=" + recordid;
+                    var url = "<?php echo $requestURl; ?>" + "?m=voteup&s=plus&r=" + recordid;
                     var xmlHttp = new XMLHttpRequest();
                     xmlHttp.open("GET", url, false);
                     xmlHttp.send();
@@ -139,7 +139,7 @@ if (isset($_GET['q'])) {
                         upbutton.disabled = false;
                         upbutton.innerHTML = 'හරි (' + upbutton.value + ')';
 
-                        var url = "<?php echo $requestURl; ?>" + "?m=voteup&sign=minus&r=" + recordid;
+                        var url = "<?php echo $requestURl; ?>" + "?m=voteup&s=minus&r=" + recordid;
                         var xmlHttp = new XMLHttpRequest();
                         xmlHttp.open("GET", url, false);
                         xmlHttp.send();
@@ -149,7 +149,7 @@ if (isset($_GET['q'])) {
                     downbutton.innerHTML = 'වැරදියි (' + (parseInt(downbutton.value) + 1) + ')';
                     downbutton.disabled = true;
 
-                    var url = "<?php echo $requestURl; ?>" + "?m=votedown&sign=plus&r=" + recordid;
+                    var url = "<?php echo $requestURl; ?>" + "?m=votedown&s=plus&r=" + recordid;
                     var xmlHttp = new XMLHttpRequest();
                     xmlHttp.open("GET", url, false);
                     xmlHttp.send();

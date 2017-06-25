@@ -89,9 +89,9 @@ if ($method == "reportMeaning") {
     }
 }
 if ($method == "voteup") {
-    if ($_GET["sign"] == "plus") {
+    if ($_GET["s"] == "plus") {
         $sqlword = "update meaning set up = up + 1 where id = " . $recordid;
-    } else if ($_GET["sign"] == "minus") {
+    } else if ($_GET["s"] == "minus") {
         $sqlword = "update meaning set up = up - 1 where id = " . $recordid;
     }
     if ($conn->query($sqlword) === TRUE) {
@@ -101,9 +101,9 @@ if ($method == "voteup") {
     }
 }
 if ($method == "votedown") {
-    if ($_GET["sign"] == "plus") {
+    if ($_GET["s"] == "plus") {
         $sqlword = "update meaning set down = down + 1 where id = " . $recordid;
-    } else if ($_GET["sign"] == "minus") {
+    } else if ($_GET["s"] == "minus") {
         $sqlword = "update meaning set down = down - 1 where id = " . $recordid;
     }
     if ($conn->query($sqlword) === TRUE) {
