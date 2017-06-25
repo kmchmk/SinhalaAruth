@@ -37,21 +37,17 @@ if ($method == "meaning") {
     $result = json_decode($response);
 //for($i = 0; $i < sizeof($result); $i+=3)
     $values = new stdClass();
+    $jsonObj = new stdClass();
     if (sizeof($result) > 0) {
+        $jsonObj->option = "found";
         $values->r = $result[0];
         $values->meaning = $result[1];
         $values->example = $result[2];
         $values->up = $result[3];
         $values->down = $result[4];
     } else {
-        $values->r = "Not fount";
-        $values->meaning = "Not fount";
-        $values->example = "Not fount";
-        $values->up = "Not fount";
-        $values->down = "Not fount";
+        $jsonObj->option = "not_found";
     }
-    $jsonObj = new stdClass();
-    $jsonObj->option = "str";
     $jsonObj->values = $values;
     $err = curl_error($curl);
     curl_close($curl);
@@ -75,11 +71,14 @@ if ($method == "voteup") {
     ));
 
     $response = curl_exec($curl);
-    
+
     $values = new stdClass();
     $values->msg = $response;
     $jsonObj = new stdClass();
-    $jsonObj->option = "str";
+    $jsonObj->option = "done";
+    if($response=="error"){
+        $jsonObj->option = "error";
+    }
     $jsonObj->values = $values;
     echo json_encode($jsonObj);
 }
@@ -99,14 +98,16 @@ if ($method == "votedown") {
     ));
 
     $response = curl_exec($curl);
-    
+
     $values = new stdClass();
     $values->msg = $response;
     $jsonObj = new stdClass();
-    $jsonObj->option = "str";
+    $jsonObj->option = "done";
+        if($response=="error"){
+        $jsonObj->option = "error";
+    }
     $jsonObj->values = $values;
     echo json_encode($jsonObj);
-
 }
 
 if ($method == "reportMeaning") {
@@ -125,11 +126,14 @@ if ($method == "reportMeaning") {
     ));
 
     $response = curl_exec($curl);
-    
+
     $values = new stdClass();
     $values->msg = $response;
     $jsonObj = new stdClass();
-    $jsonObj->option = "str";
+    $jsonObj->option = "done";
+        if($response=="error"){
+        $jsonObj->option = "error";
+    }
     $jsonObj->values = $values;
     echo json_encode($jsonObj);
 }

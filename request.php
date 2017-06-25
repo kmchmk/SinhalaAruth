@@ -74,10 +74,12 @@ if ($method == "addWord") {
         if ($conn->query($sqlmeaning) === TRUE) {
             echo "ඔබ විසින් සාර්ථකව වචනයක් ඇතුලත් කරන ලදී.";
         } else {
-            echo "Error: " . $sqlmeaning . "<br>" . $conn->error;
+            echo "error";
+//            echo "Error: " . $sqlmeaning . "<br>" . $conn->error;
         }
     } else {
-        echo "Error: " . $sqlword . "<br>" . $conn->error;
+        echo "error";
+//        echo "Error: " . $sqlword . "<br>" . $conn->error;
     }
 }
 if ($method == "reportMeaning") {
@@ -85,7 +87,8 @@ if ($method == "reportMeaning") {
     if ($conn->query($sqlword) === TRUE) {
         echo 'ඔබගේ වාර්තාව ලබාදෙන ලදී.';
     } else {
-        echo "Error: " . $sqlword . "<br>" . $conn->error;
+        echo "error";
+        //echo "Error: " . $sqlword . "<br>" . $conn->error;
     }
 }
 if ($method == "voteup") {
@@ -97,7 +100,8 @@ if ($method == "voteup") {
     if ($conn->query($sqlword) === TRUE) {
         echo 'ස්තුතියි!';
     } else {
-        echo "Error: " . $sqlword . "<br>" . $conn->error;
+        echo "error";
+        //echo "Error: " . $sqlword . "<br>" . $conn->error;
     }
 }
 if ($method == "votedown") {
@@ -109,7 +113,8 @@ if ($method == "votedown") {
     if ($conn->query($sqlword) === TRUE) {
         echo 'ස්තූතියි!';
     } else {
-        echo "Error: " . $sqlword . "<br>" . $conn->error;
+        echo "error";
+        //echo "Error: " . $sqlword . "<br>" . $conn->error;
     }
 }
 ?>
