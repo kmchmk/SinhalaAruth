@@ -31,7 +31,7 @@ if (isset($_GET['q'])) {
                     <li><a href=<?php echo $helpURL; ?> title="වැඩි විස්තර සඳහා">උදව්</a></li>
                 </ul>
             </div>
-            Please update this application. <a href="https://www.dropbox.com/sh/6wrgdm25jqetjg9/AAC_BSQOqJhUI3ur0Eyfez8Ga?dl=0"><u>Download</u></a>
+            Please update this application. <a href="https://www.dropbox.com/sh/6wrgdm25jqetjg9/AAC_BSQOqJhUI3ur0Eyfez8Ga?dl=0"><u>Download</u></a> 
             <form action=<?php echo $thisURL; ?> method="get" class="search" id="search">
                 <fieldset>
                     <input type="text" id="thesinglishbox" onkeyup="convert()" placeholder="සිංහල/English">
@@ -39,8 +39,8 @@ if (isset($_GET['q'])) {
                 <fieldset>
                     <input required type="search" name="q" value="<?php echo $key; ?>" id="thesearchbox" placeholder="වචනයක් ඇතුලත් කරන්න.">
                     <input type="submit" id="thesearchbutton" value="සොයන්න">
-<!--                    <input type=submit id="thefeedbackbutton" value="Up">
-                    <input type=submit id="thefeedbackbutton" value="Down">-->
+                    <!--<input type=submit id="thefeedbackbutton" value="Up">-->
+                    <!--<input type=submit id="thefeedbackbutton" value="Down">-->
                 </fieldset>
             </form>
 
@@ -66,14 +66,16 @@ if (isset($_GET['q'])) {
             curl_close($curl);
 
             if (sizeof($result) > 0) {
-                echo 'මෙම "හරි", "වැරදි" බට්න් තවම ක්‍රියාකාරී මට්ටමේ නැත.';
-                for ($i = 0; $i < sizeof($result); $i+=3) {
-                    echo '<div class="SemiAcceptableAds"><h3>තේරුම ' . ($i + 3) / 3;
-                    echo '<input type=submit id="thefeedbackbutton" value = "Report" onclick="report(\'' . $result[$i] . '\')">';
+                $perRecord = 5;
+
+                for ($i = 0; $i < sizeof($result); $i+=$perRecord) {
+                    $index = ($i + $perRecord) / $perRecord;
+                    echo '<div class="SemiAcceptableAds"><h3>තේරුම ' . $index;
+                    echo '<button class="thefeedbackbutton"  onclick="report(\'' . $result[$i] . '\')">Report</button>';
                     echo '</h3><div id="recent">';
                     echo $result[$i + 1];
-                    echo '<input type=submit id="thefeedbackbutton" value="වැරදියි" onclick="votedown(\'' . $result[$i] . '\')">';
-                    echo '<input type=submit id="thefeedbackbutton" value="හරි" onclick="voteup(\'' . $result[$i] . '\')">';
+                    echo '<button id="feedbackbuttondown'.$index.'" class="thefeedbackbutton" value="' . $result[$i + 4] . '" onclick="votedown(\'' . $result[$i] . '\','.$index.')">වැරදියි (' . $result[$i + 4] . ')</button>';
+                    echo '<button id="feedbackbuttonup'.$index.'" class="thefeedbackbutton" value="' . $result[$i + 3] . '" onclick="voteup(\'' . $result[$i] . '\','.$index.')">හරි (' . $result[$i + 3] . ')</button>';
                     echo '</div></div>';
                     //echo '<div class="SemiAcceptableAds"><h3>උදා:</h3>';
                     echo '<div id="recent">';
@@ -82,7 +84,6 @@ if (isset($_GET['q'])) {
                     //echo '</div>';
                 }
             } else if ($key) {
-
                 echo '<div class="SemiAcceptableAds">';
                 echo '<p class="generic">ඔබ ඇතුළත් කළ<b> "' . $key . '" </b>යන වචනයෙහි අර්ථය අපට සොයාගත නොහැකි විය. කරුණාකර හැකිනම් ඇතුළත් කරන්න.</p>';
                 echo '</div>';
@@ -105,21 +106,55 @@ if (isset($_GET['q'])) {
                         alert(message);
                     }
                 }
-                function voteup(recordid) {
-                    var url = "<?php echo $requestURl; ?>" + "?m=voteup&r=" + recordid;
+                function voteup(recordid,index) {
+                    var upbutton = document.getElementById('feedbackbuttonup'+index);
+                    var downbutton = document.getElementById('feedbackbuttondown'+index);
+
+                    if (downbutton.disabled) {
+                        downbutton.disabled = false;
+                        downbutton.innerHTML = 'වැරදියි (' + downbutton.value + ')';
+
+                        var url = "<?php echo $requestURl; ?>" + "?m=votedown&sign=minus&r=" + recordid;
+                        var xmlHttp = new XMLHttpRequest();
+                        xmlHttp.open("GET", url, false);
+                        xmlHttp.send();
+                        var message = xmlHttp.responseText;
+
+                    }
+                    upbutton.innerHTML = 'හරි (' + (parseInt(upbutton.value) + 1) + ')';
+                    upbutton.disabled = true;
+
+                    var url = "<?php echo $requestURl; ?>" + "?m=voteup&sign=plus&r=" + recordid;
                     var xmlHttp = new XMLHttpRequest();
                     xmlHttp.open("GET", url, false);
                     xmlHttp.send();
                     var message = xmlHttp.responseText;
-                    alert(message);
+                    //alert(message);
                 }
-                function votedown(recordid) {
-                    var url = "<?php echo $requestURl; ?>" + "?m=votedown&r=" + recordid;
+                function votedown(recordid,index) {
+                    var upbutton = document.getElementById('feedbackbuttonup'+index);
+                    var downbutton = document.getElementById('feedbackbuttondown'+index);
+
+                    if (upbutton.disabled) {
+                        upbutton.disabled = false;
+                        upbutton.innerHTML = 'හරි (' + upbutton.value + ')';
+
+                        var url = "<?php echo $requestURl; ?>" + "?m=voteup&sign=minus&r=" + recordid;
+                        var xmlHttp = new XMLHttpRequest();
+                        xmlHttp.open("GET", url, false);
+                        xmlHttp.send();
+                        var message = xmlHttp.responseText;
+
+                    }
+                    downbutton.innerHTML = 'වැරදියි (' + (parseInt(downbutton.value) + 1) + ')';
+                    downbutton.disabled = true;
+
+                    var url = "<?php echo $requestURl; ?>" + "?m=votedown&sign=plus&r=" + recordid;
                     var xmlHttp = new XMLHttpRequest();
                     xmlHttp.open("GET", url, false);
                     xmlHttp.send();
                     var message = xmlHttp.responseText;
-                    alert(message);
+                    //alert(message);
                 }
             </script>
             <div class="SemiAcceptableAds">
@@ -243,7 +278,8 @@ if (isset($_GET['q'])) {
             nVowels = 26;
 
             specialConsonantsUni[0] = 'ං';
-            specialConsonants[0] = /\\n/g;
+            //specialConsonants[0] = /\\n/g;
+            specialConsonants[0] = /\x/g;
             specialConsonantsUni[1] = 'ඃ';
             specialConsonants[1] = /\\h/g;
             specialConsonantsUni[2] = 'ඞ';
@@ -257,11 +293,11 @@ if (isset($_GET['q'])) {
             specialConsonants[5] = /\\r/g;
 
             consonantsUni[0] = 'ඬ';
-            consonants[0] = 'nnd';
+            consonants[0] = 'zd';
             consonantsUni[1] = 'ඳ';
-            consonants[1] = 'nndh';
+            consonants[1] = 'zdh';
             consonantsUni[2] = 'ඟ';
-            consonants[2] = 'nng';
+            consonants[2] = 'zg';
             consonantsUni[3] = 'ථ';
             consonants[3] = 'Th';
             consonantsUni[4] = 'ධ';

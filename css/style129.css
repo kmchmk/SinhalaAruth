@@ -898,8 +898,9 @@ form.search #thesearchbutton {
     padding: 0;
     width: 20%;
 }
-div.SemiAcceptableAds #thefeedbackbutton {
-    background-color: #ccffcc;
+
+button.thefeedbackbutton {
+    background-color: #ffcccc;
     border-radius: 5px;
     color: #6666ff;
     cursor: pointer;
@@ -1689,7 +1690,7 @@ div.mctitle a {
         margin: 0 0 0 10px;
         width: 75px;
     }
-    div.SemiAcceptableAds #thefeedbackbutton {
+    button.thefeedbackbutton {
         width: 15%;
     }
     form.search #thesinglishbox {
@@ -1791,7 +1792,7 @@ div.mctitle a {
     form.search #thesearchbutton {
         width: 18%;
     }
-    div.SemiAcceptableAds #thefeedbackbutton {
+    button.thefeedbackbutton {
         width: 18%;
     }
     #votebox,

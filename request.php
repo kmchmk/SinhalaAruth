@@ -36,7 +36,7 @@ if ($conn->connect_error) {
 }
 
 if ($method == "meaning") {
-    $sql = "SELECT meaning.id, meaning, example FROM meaning inner join word on word.id = meaning.wordid where word = '$key' and report = 0";
+    $sql = "SELECT meaning.id, meaning, example, up, down FROM meaning inner join word on word.id = meaning.wordid where word = '$key' and report = 0 ORDER BY up DESC";
     $result = $conn->query($sql);
 //$numRows = mysqli_num_rows($result);
 
@@ -45,6 +45,8 @@ if ($method == "meaning") {
         $rows[] = $r['id'];
         $rows[] = $r['meaning'];
         $rows[] = $r['example'];
+        $rows[] = $r['up'];
+        $rows[] = $r['down'];
     }
 
     $json = json_encode($rows);
@@ -79,7 +81,7 @@ if ($method == "addWord") {
     }
 }
 if ($method == "reportMeaning") {
-    $sqlword = "update meaning set report = 1 where id = ".$recordid.";";
+    $sqlword = "update meaning set report = 1 where id = " . $recordid . ";";
     if ($conn->query($sqlword) === TRUE) {
         echo 'ඔබගේ වාර්තාව ලබාදෙන ලදී.';
     } else {
@@ -87,7 +89,11 @@ if ($method == "reportMeaning") {
     }
 }
 if ($method == "voteup") {
-    $sqlword = "update meaning set up = up + 1 where id = ".$recordid.";";
+    if ($_GET["sign"] == "plus") {
+        $sqlword = "update meaning set up = up + 1 where id = " . $recordid;
+    } else if ($_GET["sign"] == "minus") {
+        $sqlword = "update meaning set up = up - 1 where id = " . $recordid;
+    }
     if ($conn->query($sqlword) === TRUE) {
         echo 'ස්තුතියි!';
     } else {
@@ -95,13 +101,16 @@ if ($method == "voteup") {
     }
 }
 if ($method == "votedown") {
-    $sqlword = "update meaning set down = down + 1 where id = ".$recordid.";";
+    if ($_GET["sign"] == "plus") {
+        $sqlword = "update meaning set down = down + 1 where id = " . $recordid;
+    } else if ($_GET["sign"] == "minus") {
+        $sqlword = "update meaning set down = down - 1 where id = " . $recordid;
+    }
     if ($conn->query($sqlword) === TRUE) {
         echo 'ස්තූතියි!';
     } else {
         echo "Error: " . $sqlword . "<br>" . $conn->error;
     }
 }
-
 ?>
 
