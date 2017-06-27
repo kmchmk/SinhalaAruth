@@ -1,6 +1,6 @@
 ﻿<form action="javascript:addWord();" class="search" id="search">
     <fieldset>
-        <input required type="text" id="thewordbox" placeholder="නව වචනයක් ඇතුලත් කරන්න..." value='<?php echo $key ?>' >
+        <input required type="text" id="thewordbox" placeholder="නව වචනයක් ඇතුලත් කරන්න..." value='<?php echo $word ?>' >
     </fieldset>
     <fieldset>
         <textarea required rows=3  type="text" id="themeaningbox" placeholder="තේරුම ඇතුළත් කරන්න..."></textarea>

@@ -1,12 +1,8 @@
 <?php
 
-if (isset($_GET["q"])) {
-    $key = $_GET["q"];
-}
 if (isset($_GET["m"])) {
     $method = $_GET["m"];
 }
-
 if (isset($_GET["w"])) {//word
     $word = $_GET["w"];
 }
@@ -36,7 +32,7 @@ if ($conn->connect_error) {
 }
 
 if ($method == "meaning") {
-    $sql = "SELECT meaning.id, meaning, example, up, down FROM meaning inner join word on word.id = meaning.wordid where word = '$key' and report = 0 ORDER BY up DESC";
+    $sql = "SELECT meaning.id, meaning, example, up, down FROM meaning inner join word on word.id = meaning.wordid where word = '$word' and report = 0 ORDER BY up DESC";
     $result = $conn->query($sql);
 //$numRows = mysqli_num_rows($result);
 
@@ -54,7 +50,7 @@ if ($method == "meaning") {
 }
 
 if ($method == "synonym") {
-    $sql = "SELECT word from (SELECT s1.word FROM synonym s1, synonym s2  where s2.word = '$key' and s2.id = s1.id) s3 where s3.word != '$key'";
+    $sql = "SELECT word from (SELECT s1.word FROM synonym s1, synonym s2  where s2.word = '$word' and s2.id = s1.id) s3 where s3.word != '$word'";
     $result = $conn->query($sql);
 //$numRows = mysqli_num_rows($result);
 

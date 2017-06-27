@@ -9,9 +9,9 @@ $thisURL = "http://" . $path . "/index.php";
 $requestURl = "http://" . $path . "/request.php";
 $addURL = "http://" . $path . "/add.php";
 $helpURL = "http://" . $path . "/help.php";
-$key = "";
-if (isset($_GET['q'])) {
-    $key = $_GET['q'];
+$word = "";
+if (isset($_GET['w'])) {
+    $word = $_GET['w'];
 }
 ?>
 <html lang="en" class="gr__torrentz2_eu">
@@ -37,7 +37,7 @@ if (isset($_GET['q'])) {
                     <input type="text" id="thesinglishbox" onkeyup="convert()" placeholder="සිංහල/English">
                 </fieldset>
                 <fieldset>
-                    <input required type="search" name="q" value="<?php echo $key; ?>" id="thesearchbox" placeholder="වචනයක් ඇතුලත් කරන්න.">
+                    <input required type="search" name="w" value="<?php echo $word; ?>" id="thesearchbox" placeholder="වචනයක් ඇතුලත් කරන්න.">
                     <input type="submit" id="thesearchbutton" value="සොයන්න">
                     <!--<input type=submit id="thefeedbackbutton" value="Up">-->
                     <!--<input type=submit id="thefeedbackbutton" value="Down">-->
@@ -48,7 +48,7 @@ if (isset($_GET['q'])) {
             <?php
             $curl = curl_init();
             curl_setopt_array($curl, array(
-                CURLOPT_URL => $requestURl . "?m=meaning&q=" . $key,
+                CURLOPT_URL => $requestURl . "?m=meaning&w=" . $word,
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => "",
                 CURLOPT_MAXREDIRS => 10,
@@ -83,9 +83,9 @@ if (isset($_GET['q'])) {
                     echo '</div>';
                     //echo '</div>';
                 }
-            } else if ($key) {
+            } else if ($word) {
                 echo '<div class="SemiAcceptableAds">';
-                echo '<p class="generic">ඔබ ඇතුළත් කළ<b> "' . $key . '" </b>යන වචනයෙහි අර්ථය අපට සොයාගත නොහැකි විය. කරුණාකර හැකිනම් ඇතුළත් කරන්න.</p>';
+                echo '<p class="generic">ඔබ ඇතුළත් කළ<b> "' . $word . '" </b>යන වචනයෙහි අර්ථය අපට සොයාගත නොහැකි විය. කරුණාකර හැකිනම් ඇතුළත් කරන්න.</p>';
                 echo '</div>';
                 include('./addForm.php');
             } else {

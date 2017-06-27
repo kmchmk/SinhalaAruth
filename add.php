@@ -9,9 +9,9 @@ $requestURl = "http://" . $path . "/request.php";
 $addURL = "http://" . $path . "/add.php";
 $helpURL = "http://" . $path . "/help.php";
 
-$key = "";
-if (isset($_GET['q'])) {
-    $key = $_GET['q'];
+$word = "";
+if (isset($_GET['w'])) {
+    $word = $_GET['w'];
 }
 ?>
 <html lang="en" class="gr__torrentz2_eu">
