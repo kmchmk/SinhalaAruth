@@ -5,7 +5,11 @@
         <group>
             <file>file:/C:/xampp/htdocs/SinhalaAruth/index.php</file>
             <file>file:/C:/xampp/htdocs/SinhalaAruth/request.php</file>
+            <file>file:/C:/xampp/htdocs/SinhalaAruth/help.php</file>
+            <file>file:/C:/xampp/htdocs/SinhalaAruth/version.php</file>
             <file>file:/C:/xampp/htdocs/SinhalaAruth/fbbot/botrequest.php</file>
+            <file>file:/C:/xampp/htdocs/SinhalaAruth/add.php</file>
+            <file>file:/C:/xampp/htdocs/SinhalaAruth/addForm.php</file>
         </group>
     </open-files>
 </project-private>
