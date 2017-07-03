@@ -25,34 +25,37 @@ if (isset($_GET["e"])) {
 
 
 if ($method == "meaning") {
-    $curl = curl_init();
-    curl_setopt_array($curl, array(
-        CURLOPT_URL => $requestURl . "?m=meaning&w=" . $word,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 30,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "GET",
-        CURLOPT_HTTPHEADER => array(
-            "cache-control: no-cache"
-        ),
-    ));
 
-    $response = curl_exec($curl);
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => str_replace ( ' ', '%20',$requestURl . "?m=meaning&w=" . $word),
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                "cache-control: no-cache"
+            ),
+        ));
+
+        $response = curl_exec($curl);
 //echo $response;
-    $result = json_decode($response);
+        $result = json_decode($response);
+    
 //for($i = 0; $i < sizeof($result); $i+=3)
     $values = new stdClass();
     $jsonObj = new stdClass();
     if (sizeof($result) > 0) {
         $jsonObj->option = "found";
-        $values->r = $result[0];
-        $values->meaning = $result[1];
-        $values->example = $result[2];
-        $values->up = $result[3];
-        $values->down = $result[4];
-    } else {
+        $values->r = $result[0]->id;
+        $values->meaning = $result[0]->meaning;
+        $values->example = $result[0]->example;
+        $values->up = (string)$result[0]->up;
+        $values->down = (string)$result[0]->down;
+        $values->english = $result[0]->english;
+    }  else {
         $jsonObj->option = "not_found";
     }
     $jsonObj->values = $values;
@@ -63,54 +66,60 @@ if ($method == "meaning") {
 }
 
 if ($method == "voteup") {
-    $curl = curl_init();
-    curl_setopt_array($curl, array(
-        CURLOPT_URL => $requestURl . "?m=voteup&s=plus&r=" . $recordid,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 30,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "GET",
-        CURLOPT_HTTPHEADER => array(
-            "cache-control: no-cache"
-        ),
-    ));
+    $response = "";
 
-    $response = curl_exec($curl);
+    if (isset($recordid)) {
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => str_replace ( ' ', '%20',$requestURl . "?m=voteup&s=plus&r=" . $recordid),
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                "cache-control: no-cache"
+            ),
+        ));
 
+        $response = curl_exec($curl);
+    }
     $values = new stdClass();
     $values->msg = $response;
     $jsonObj = new stdClass();
     $jsonObj->option = "done";
-    if ($response == "error") {
+    if ($response == "error" | $response == "") {
         $jsonObj->option = "error";
     }
     $jsonObj->values = $values;
     echo json_encode($jsonObj);
 }
 if ($method == "votedown") {
-    $curl = curl_init();
-    curl_setopt_array($curl, array(
-        CURLOPT_URL => $requestURl . "?m=votedown&s=plus&r=" . $recordid,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 30,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "GET",
-        CURLOPT_HTTPHEADER => array(
-            "cache-control: no-cache"
-        ),
-    ));
+    $response = "";
 
-    $response = curl_exec($curl);
+    if (isset($recordid)) {
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => str_replace ( ' ', '%20',$requestURl . "?m=votedown&s=plus&r=" . $recordid),
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                "cache-control: no-cache"
+            ),
+        ));
 
+        $response = curl_exec($curl);
+    }
     $values = new stdClass();
     $values->msg = $response;
     $jsonObj = new stdClass();
     $jsonObj->option = "done";
-    if ($response == "error") {
+    if ($response == "error" | $response == "") {
         $jsonObj->option = "error";
     }
     $jsonObj->values = $values;
@@ -118,27 +127,30 @@ if ($method == "votedown") {
 }
 
 if ($method == "reportMeaning") {
-    $curl = curl_init();
-    curl_setopt_array($curl, array(
-        CURLOPT_URL => $requestURl . "?m=reportMeaning&r=" . $recordid,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 30,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "GET",
-        CURLOPT_HTTPHEADER => array(
-            "cache-control: no-cache"
-        ),
-    ));
+    $response = "";
 
-    $response = curl_exec($curl);
+    if (isset($recordid)) {
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => str_replace ( ' ', '%20',$requestURl . "?m=reportMeaning&r=" . $recordid),
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                "cache-control: no-cache"
+            ),
+        ));
 
+        $response = curl_exec($curl);
+    }
     $values = new stdClass();
     $values->msg = $response;
     $jsonObj = new stdClass();
     $jsonObj->option = "done";
-    if ($response == "error") {
+    if ($response == "error" | $response == "") {
         $jsonObj->option = "error";
     }
     $jsonObj->values = $values;
@@ -146,29 +158,33 @@ if ($method == "reportMeaning") {
 }
 
 if ($method == "addWord") {
-    $curl = curl_init();
-    curl_setopt_array($curl, array(
-        CURLOPT_URL => $requestURl . "?m=addWord&w=" . $word . "&a=" . $meaning . "&e=" . $example,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 30,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "GET",
-        CURLOPT_HTTPHEADER => array(
-            "cache-control: no-cache"
-        ),
-    ));
+    if (isset($word) & isset($meaning) & isset($example)) {
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => str_replace ( ' ', '%20',$requestURl . "?m=addWord&w=" . $word . "&a=" . $meaning . "&e=" . $example),
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                "cache-control: no-cache"
+            ),
+        ));
 
-    $response = curl_exec($curl);
+        $response = curl_exec($curl);
+    }
+    //echo $response;
     $values = new stdClass();
     $values->msg = $response;
     $jsonObj = new stdClass();
     $jsonObj->option = "done";
-    if ($response == "error") {
+    if ($response == "error" | $response == "") {
         $jsonObj->option = "error";
     }
     $jsonObj->values = $values;
     echo json_encode($jsonObj);
+    //echo json_encode($jsonObj);
 }
 ?>

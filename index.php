@@ -11,7 +11,7 @@ $addURL = "http://" . $path . "/add.php";
 $helpURL = "http://" . $path . "/help.php";
 $word = "";
 if (isset($_GET['w'])) {
-    $word = $_GET['w'];
+    $word = trim($_GET['w'], " ");
 }
 ?>
 <html lang="en" class="gr__torrentz2_eu">
@@ -25,21 +25,57 @@ if (isset($_GET['w'])) {
     <body data-gr-c-s-loaded="true">
         <div id="wrap">
             <div id="top">
-                <h1><a href=<?php echo $thisURL; ?> title="සිංහල වචන සොයන්න">සිංහල<sup>අරුත්</sup></a></h1>
+                <h1><a href="<?php echo $thisURL; ?>" title="සිංහල වචන සොයන්න">සිංහල<sup>අරුත්</sup></a></h1>
                 <ul>
-                    <li><a href=<?php echo $addURL; ?> title="වචන ඇතුලත් කරන්න">අළුත්</a></li>
-                    <li><a href=<?php echo $helpURL; ?> title="වැඩි විස්තර සඳහා">උදව්</a></li>
+                    <li><a href="<?php echo $addURL; ?>" title="වචන ඇතුලත් කරන්න">අළුත්</a></li>
+                    <li><a href="<?php echo $helpURL; ?>" title="වැඩි විස්තර සඳහා">උදව්</a></li>
                 </ul>
             </div>
-            <form action=<?php echo $thisURL; ?> method="get" class="search" id="search">
+            <form action="<?php echo $thisURL; ?>" method="get" class="search" id="search">
                 <fieldset>
-                    <input type="text" id="thesinglishbox" onkeyup="convert()" placeholder="සිංහල/English">
+                    <input type="text" id="thesinglishbox" onkeyup="convert();suggest()" placeholder="සිංහල/English">
+
                 </fieldset>
                 <fieldset>
-                    <input required type="search" name="w" value="<?php echo $word; ?>" id="thesearchbox" placeholder="වචනය කුමක්ද?.">
+                    <input required type="search" name="w" value="<?php echo $word; ?>" id="thesearchbox" placeholder="වචනය කුමක්ද?." autocomplete="off" autofocus="" onkeyup="suggest()">
+                    <ul class="autocomplete" id="suggestions">
+                        <!--<li value="1">testing</li>-->
+                    </ul>
+                    <script>
+
+                            var timer;
+
+                            function suggest() {
+                                clearTimeout(timer);
+                                timer = setTimeout(function(){ getsuggestions(); }, 1000);
+                            }
+
+                        function getsuggestions() {
+                            var phrase = document.getElementById('thesearchbox').value;
+                            var suggestionbox = document.getElementById('suggestions');
+
+                            if (phrase.length < 2) {
+                                suggestionbox.innerHTML = '';
+                                return;
+                            }
+
+                            var url = "<?php echo $requestURl; ?>" + "?m=suggestions&p=" + phrase;
+                            var xmlHttp = new XMLHttpRequest();
+                            xmlHttp.open("GET", url, false);
+                            xmlHttp.send();
+                            var message = xmlHttp.responseText;
+                            obj = JSON.parse(message);
+
+                            var suggestionlist = '';
+                            for (var i = 0; i < obj.length; i++) {
+                                suggestionlist += '<li value="1">' + obj[i] + '</li>';
+                            }
+                            suggestionbox.innerHTML = suggestionlist;
+
+
+                        }
+                    </script>
                     <input type="submit" id="thesearchbutton" value="සොයන්න">
-                    <!--<input type=submit id="thefeedbackbutton" value="Up">-->
-                    <!--<input type=submit id="thefeedbackbutton" value="Down">-->
                 </fieldset>
             </form>
 
@@ -47,7 +83,7 @@ if (isset($_GET['w'])) {
             <?php
             $curl = curl_init();
             curl_setopt_array($curl, array(
-                CURLOPT_URL => $requestURl . "?m=meaning&w=" . $word,
+                CURLOPT_URL => str_replace(' ', '%20', $requestURl . "?m=meaning&w=" . $word),
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => "",
                 CURLOPT_MAXREDIRS => 10,
@@ -65,21 +101,26 @@ if (isset($_GET['w'])) {
             curl_close($curl);
 
             if (sizeof($result) > 0) {
-                $perRecord = 5;
-
-                for ($i = 0; $i < sizeof($result); $i+=$perRecord) {
-                    $index = ($i + $perRecord) / $perRecord;
-                    echo '<div class="SemiAcceptableAds"><h3>තේරුම ' . $index;
-                    echo '<button class="thefeedbackbutton"  onclick="report(\'' . $result[$i] . '\')">Report</button>';
-                    echo '</h3><div id="recent">';
-                    echo $result[$i + 1];
-                    echo '<button id="feedbackbuttondown'.$index.'" class="thefeedbackbutton" value="' . $result[$i + 4] . '" onclick="votedown(\'' . $result[$i] . '\','.$index.')">වැරදියි (' . $result[$i + 4] . ')</button>';
-                    echo '<button id="feedbackbuttonup'.$index.'" class="thefeedbackbutton" value="' . $result[$i + 3] . '" onclick="voteup(\'' . $result[$i] . '\','.$index.')">හරි (' . $result[$i + 3] . ')</button>';
-                    echo '</div></div>';
+                for ($i = 0; $i < sizeof($result); $i++) {
+                    echo '<div class="SemiAcceptableAds"><h3>තේරුම ' . ($i +1);
+                echo '<button class="thefeedbackbutton"  onclick="report(\'' . $result[$i]->id . '\')">Report</button>';
+                    echo '<button id="feedbackbuttondown' . $i . '" class="thefeedbackbutton" value="' . $result[$i]->down . '" onclick="votedown(\'' . $result[$i]->id . '\',' . $i . ')">වැරදියි (' . $result[$i]->down . ')</button>';
+                    echo '<button id="feedbackbuttonup' . $i . '" class="thefeedbackbutton" value="' . $result[$i]->up . '" onclick="voteup(\'' . $result[$i]->id . '\',' . $i . ')">හරි (' . $result[$i]->up . ')</button>';
+                    echo '</h3>';
+                    if ($result[$i]->meaning != "") {
+                        echo '<div id="recent">' . $result[$i]->meaning . '</div></div>';
+                    }
                     //echo '<div class="SemiAcceptableAds"><h3>උදා:</h3>';
-                    echo '<div id="recent">';
-                    echo '<h3>උදා: </h3>' . $result[$i + 2];
-                    echo '</div>';
+                    if ($result[$i]->example != "") {
+                        echo '<div id="recent">';
+                        echo '<h3>උදා: </h3>' . $result[$i]->example;
+                        echo '</div>';
+                    }
+                    if ($result[$i]->english != "") {
+                        echo '<div id="recent">';
+                        echo '<h3>English: </h3>' . $result[$i]->english;
+                        echo '</div>';
+                    }
                     //echo '</div>';
                 }
             } else if ($word) {
@@ -105,9 +146,9 @@ if (isset($_GET['w'])) {
                         alert(message);
                     }
                 }
-                function voteup(recordid,index) {
-                    var upbutton = document.getElementById('feedbackbuttonup'+index);
-                    var downbutton = document.getElementById('feedbackbuttondown'+index);
+                function voteup(recordid, index) {
+                    var upbutton = document.getElementById('feedbackbuttonup' + index);
+                    var downbutton = document.getElementById('feedbackbuttondown' + index);
 
                     if (downbutton.disabled) {
                         downbutton.disabled = false;
@@ -130,9 +171,9 @@ if (isset($_GET['w'])) {
                     var message = xmlHttp.responseText;
                     //alert(message);
                 }
-                function votedown(recordid,index) {
-                    var upbutton = document.getElementById('feedbackbuttonup'+index);
-                    var downbutton = document.getElementById('feedbackbuttondown'+index);
+                function votedown(recordid, index) {
+                    var upbutton = document.getElementById('feedbackbuttonup' + index);
+                    var downbutton = document.getElementById('feedbackbuttondown' + index);
 
                     if (upbutton.disabled) {
                         upbutton.disabled = false;
