@@ -199,9 +199,7 @@ if (isset($_GET['w'])) {
             </script>
             <div class="SemiAcceptableAds">
                 <p class="generic">
-                    <a href="http://maduraonline.com/" target="_blank">සිංහල-ඉංග්‍රීසි<img  src="img/cutehamster.gif" title="Hi! search something" alt="">
-                        <!--</a> | <a href="http://torrentzwealmisr.onion/">Torrentz2 Onion<span class="j z spadlock_index"></span>-->
-                    </a> | <a href="http://dictionary.cambridge.org/" target="_blank">ඉංග්‍රීසි-ඉංග්‍රීසි<img  src="img/cutehamster.gif" title="Hi! search something" alt=""></a>
+                    <img  src="img/flag.gif" title="Hi! search something" alt="">
                 </p>
                 <div id="footer">
                     <br>

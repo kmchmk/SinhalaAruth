@@ -36,7 +36,7 @@ $helpURL = "http://" . $path . "/help.php";
                 </ol>
                 <p><b>Chat bot</b></p>
                 <ol>
-                    <li>අපගේ <a href="https://www.facebook.com/%E0%B6%85%E0%B6%BB%E0%B7%94%E0%B6%AD%E0%B7%8A-%E0%B6%B6%E0%B7%9C%E0%B6%A7%E0%B7%8A-Aruth-Bot-1686175934744495/"><u>facebook පිටුවේ</u></a> ඇති <a href="http://m.me/1686175934744495"><u>chat bot</u></a> හරහාද ඔබට මෙම සේවාව භාවිතා කළ හැක.</li>
+                    <li>අපගේ <a href="https://www.facebook.com/aruthbot/"><u>facebook පිටුවේ</u></a> ඇති <a href="http://m.me/aruthbot"><u>chat bot</u></a> හරහාද ඔබට මෙම සේවාව භාවිතා කළ හැක.</li>
 
                 </ol>
                 <p><b>වචන ඇතුලත් කිරීම</b></p>

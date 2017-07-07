@@ -47,9 +47,6 @@ if ($method == "meaning") {
     $rows = array();
     while ($r = mysqli_fetch_assoc($result)) {
 
-//        $temp_meaning = "";
-//        $temp_example = "";
-//        $temp_english = "";
         if ($r['meaning'] == NULL | trim($r['meaning']) == "") {
             $r['meaning'] = "";
         }
@@ -76,7 +73,12 @@ if ($method == "meaning") {
     $json = json_encode($rows);
     echo $json;
 
-
+if(sizeof($rows) == 0){
+    $sqlword = "insert into word (word,time) values (?, NOW())";
+    $stmt = $conn->prepare($sqlword);
+    $stmt->bind_param('s', $word);
+    $stmt->execute();
+}
 
 
 

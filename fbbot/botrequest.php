@@ -55,6 +55,7 @@ if ($method == "meaning") {
         $values->up = (string)$result[0]->up;
         $values->down = (string)$result[0]->down;
         $values->english = $result[0]->english;
+        $values->link = str_replace(' ', '%20',"www.sinhalaaruth.tk/?w=".$word);
     }  else {
         $jsonObj->option = "not_found";
     }
