@@ -1,5 +1,5 @@
 <?php
-
+include_once("analyticstracking.php");
 if (isset($_GET["m"])) {
     $method = $_GET["m"];
 }

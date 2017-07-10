@@ -23,6 +23,7 @@ if (isset($_GET['w'])) {
         <link rel="search" type="application/opensearchdescription+xml" href="https://torrentz2.eu/opensearch.xml" title="Torrents Search">
     </head>
     <body data-gr-c-s-loaded="true">
+        <?php include_once("analyticstracking.php") ?>
         <div id="wrap">
             <div id="top">
                 <h1><a href=<?php echo $thisURL; ?> title="සිංහල වචන සොයන්න">සිංහල<sup>අරුත්</sup></a></h1>

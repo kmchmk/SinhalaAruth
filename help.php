@@ -18,6 +18,7 @@ $helpURL = "http://" . $path . "/help.php";
         <link rel="search" type="application/opensearchdescription+xml" href="https://torrentz2.eu/opensearch.xml" title="Torrents Search">
     </head>
     <body>
+        <?php include_once("analyticstracking.php") ?>
         <div id="wrap">
 
             <div id="top">
