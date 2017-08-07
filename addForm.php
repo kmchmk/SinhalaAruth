@@ -11,6 +11,10 @@
     </fieldset>
     <fieldset></fieldset>
     <fieldset>
+        <textarea required rows=3 type="text" id="theenglishbox" placeholder="ඉංග්‍රීසි වචනය ඇතුලත් කරන්න..."></textarea>
+    </fieldset>
+    <fieldset></fieldset>
+    <fieldset>
         <input type="submit" id="themeaningbox" value="හරි">
     </fieldset>
     <fieldset></fieldset>
@@ -19,9 +23,9 @@
             var w = document.getElementById("thewordbox").value;
             var a = document.getElementById("themeaningbox").value;
             var e = document.getElementById("theexamplebox").value;
+            var en = document.getElementById("theenglishbox").value;
 
-
-            var url = "<?php echo $requestURl; ?>" + "?m=addWord&w=" + w + "&a=" + a + "&e=" + e;
+            var url = "<?php echo $requestURl; ?>" + "?m=addWord&w=" + w + "&a=" + a + "&e=" + e + "&en=" + en;
             var xmlHttp = new XMLHttpRequest();
             xmlHttp.open("GET", url, false);
             xmlHttp.send();

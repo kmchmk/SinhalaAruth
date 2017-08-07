@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <?php
+
 $file = fopen("config.txt", "r") or die("Unable to open file!");
 $path = fgets($file);
 fclose($file);
+
 
 $thisURL = "http://" . $path . "/index.php";
 $requestURl = "http://" . $path . "/request.php";
@@ -14,13 +16,12 @@ if (isset($_GET['w'])) {
     $word = $_GET['w'];
 }
 ?>
-<html lang="en" class="gr__torrentz2_eu">
+<html lang="en" class="sinhalaaruth">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>ශබ්ද කෝෂය</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./css/style129.css" type="text/css">
-        <link rel="search" type="application/opensearchdescription+xml" href="https://torrentz2.eu/opensearch.xml" title="Torrents Search">
+        <link rel="stylesheet" href="./css/styles.css" type="text/css">
     </head>
     <body data-gr-c-s-loaded="true">
         <?php include_once("analyticstracking.php") ?>

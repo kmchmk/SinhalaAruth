@@ -14,13 +14,12 @@ if (isset($_GET['w'])) {
     $word = trim($_GET['w'], " ");
 }
 ?>
-<html lang="en" class="gr__torrentz2_eu">
+<html lang="en" class="sinhalaaruth">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>ශබ්ද කෝෂය</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./css/style129.css" type="text/css">
-        <link rel="search" type="application/opensearchdescription+xml" href="https://torrentz2.eu/opensearch.xml" title="Torrents Search">
+        <link rel="stylesheet" href="./css/styles.css" type="text/css">
     </head>
     <body data-gr-c-s-loaded="true">
         <?php include_once("analyticstracking.php") ?>
@@ -35,21 +34,24 @@ if (isset($_GET['w'])) {
             <form action="<?php echo $thisURL; ?>" method="get" class="search" id="search">
                 <fieldset>
                     <input type="text" id="thesinglishbox" onkeyup="convert();suggest()" placeholder="සිංහල/English">
-
                 </fieldset>
                 <fieldset>
                     <input required type="search" name="w" value="<?php echo $word; ?>" id="thesearchbox" placeholder="වචනය කුමක්ද?." autocomplete="off" autofocus="" onkeyup="suggest()">
                     <ul class="autocomplete" id="suggestions">
-                        <!--<li value="1">testing</li>-->
+                        <!--                        <a value="1">testing</a>-->
+<!--                        <li ><a href="index.php">testing</a></li>
+                        <li ><a href="index.php">testing</a></li>-->
                     </ul>
                     <script>
 
-                            var timer;
+                        var timer;
 
-                            function suggest() {
-                                clearTimeout(timer);
-                                timer = setTimeout(function(){ getsuggestions(); }, 1000);
-                            }
+                        function suggest() {
+                            clearTimeout(timer);
+                            timer = setTimeout(function () {
+                                getsuggestions();
+                            }, 1000);
+                        }
 
                         function getsuggestions() {
                             var phrase = document.getElementById('thesearchbox').value;
@@ -69,7 +71,8 @@ if (isset($_GET['w'])) {
 
                             var suggestionlist = '';
                             for (var i = 0; i < obj.length; i++) {
-                                suggestionlist += '<li value="1">' + obj[i] + '</li>';
+                                suggestionlist += '<li><a href="index.php?w='+obj[i]+'">'+obj[i]+'</a></li>';
+                                
                             }
                             suggestionbox.innerHTML = suggestionlist;
 
@@ -103,8 +106,8 @@ if (isset($_GET['w'])) {
 
             if (sizeof($result) > 0) {
                 for ($i = 0; $i < sizeof($result); $i++) {
-                    echo '<div class="SemiAcceptableAds"><h3>තේරුම ' . ($i +1);
-                echo '<button class="thefeedbackbutton"  onclick="report(\'' . $result[$i]->id . '\')">Report</button>';
+                    echo '<div class="SemiAcceptableAds"><h3>තේරුම ' . ($i + 1);
+                    echo '<button class="thefeedbackbutton"  onclick="report(\'' . $result[$i]->id . '\')">Report</button>';
                     echo '<button id="feedbackbuttondown' . $i . '" class="thefeedbackbutton" value="' . $result[$i]->down . '" onclick="votedown(\'' . $result[$i]->id . '\',' . $i . ')">වැරදියි (' . $result[$i]->down . ')</button>';
                     echo '<button id="feedbackbuttonup' . $i . '" class="thefeedbackbutton" value="' . $result[$i]->up . '" onclick="voteup(\'' . $result[$i]->id . '\',' . $i . ')">හරි (' . $result[$i]->up . ')</button>';
                     echo '</h3>';

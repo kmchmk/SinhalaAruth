@@ -1,5 +1,5 @@
 <?php
-include_once("analyticstracking.php");
+
 if (isset($_GET["m"])) {
     $method = $_GET["m"];
 }
@@ -18,6 +18,9 @@ if (isset($_GET["r"])) {//recordid
 if (isset($_GET["p"])) {//phrase
     $phrase = $_GET["p"];
 }
+if (isset($_GET["en"])) {//phrase
+    $english = $_GET["en"];
+}
 
 
 
@@ -31,7 +34,7 @@ $dbname = "aruth";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
-$conn->set_charset("utf8");
+$conn->set_charset("utf8mb4");
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -50,10 +53,10 @@ if ($method == "meaning") {
         if ($r['meaning'] == NULL | trim($r['meaning']) == "") {
             $r['meaning'] = "";
         }
-        if ($r['example'] == NULL| trim($r['example']) == "") {
+        if ($r['example'] == NULL | trim($r['example']) == "") {
             $r['example'] = "";
         }
-        if ($r['english'] == NULL| trim($r['english']) == "") {
+        if ($r['english'] == NULL | trim($r['english']) == "") {
             $r['english'] = "";
         }
 //        
@@ -73,12 +76,12 @@ if ($method == "meaning") {
     $json = json_encode($rows);
     echo $json;
 
-if(sizeof($rows) == 0){
-    $sqlword = "insert into word (word,time) values (?, NOW())";
-    $stmt = $conn->prepare($sqlword);
-    $stmt->bind_param('s', $word);
-    $stmt->execute();
-}
+    if (sizeof($rows) == 0) {
+        $sqlword = "insert into word (word,time) values (?, NOW())";
+        $stmt = $conn->prepare($sqlword);
+        $stmt->bind_param('s', $word);
+        $stmt->execute();
+    }
 
 
 
@@ -114,9 +117,9 @@ if ($method == "addWord") {
     if ($stmt->execute()) {
         $result = $stmt->get_result();
         $wordid = $conn->insert_id;
-        $sqlmeaning = "insert into meaning (wordid, meaning, example, time) values (?, ?, ?, NOW())";
+        $sqlmeaning = "insert into meaning (wordid, english, meaning, example, time) values (?, ?, ?, ?, NOW())";
         $stmt = $conn->prepare($sqlmeaning);
-        $stmt->bind_param('iss', $wordid, $meaning, $example);
+        $stmt->bind_param('isss', $wordid, $english, $meaning, $example);
         if ($stmt->execute()) {
             echo "ඔබ විසින් සාර්ථකව වචනයක් ඇතුලත් කරන ලදී.";
         } else {
@@ -181,7 +184,7 @@ if ($method == "votedown") {
 
 if ($method == "suggestions") {
     $phrase = $phrase . "%";
-    $sql = 'SELECT distinct word from word where word like ? order by word asc limit 5';
+    $sql = 'SELECT DISTINCT word FROM word inner join meaning on word.id = meaning.wordid where word like ? and report = 0 ORDER BY word ASC LIMIT 5';
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('s', $phrase);
     $stmt->execute();

@@ -11,6 +11,10 @@ if (isset($_GET["m"])) {
 if (isset($_GET["w"])) {
     $word = $_GET["w"];
 }
+if (isset($_GET["w1"])) {
+    $word1 = $_GET["w1"];
+}
+
 if (isset($_GET["r"])) {
     $recordid = $_GET["r"];
 }
@@ -21,6 +25,9 @@ if (isset($_GET["a"])) {
 if (isset($_GET["e"])) {
     $example = $_GET["e"];
 }
+if (isset($_GET["en"])) {
+    $english = $_GET["en"];
+}
 
 
 
@@ -28,7 +35,7 @@ if ($method == "meaning") {
 
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => str_replace ( ' ', '%20',$requestURl . "?m=meaning&w=" . $word),
+            CURLOPT_URL => str_replace ( ' ', '%20',$requestURl . "?m=meaning&w=" . $word1),
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -55,10 +62,13 @@ if ($method == "meaning") {
         $values->up = (string)$result[0]->up;
         $values->down = (string)$result[0]->down;
         $values->english = $result[0]->english;
-        $values->link = str_replace(' ', '%20',"www.sinhalaaruth.tk/?w=".$word);
+        $values->link = str_replace(' ', '%20',"www.sinhalaaruth.tk/?w=".$word1);
+        
+        
     }  else {
         $jsonObj->option = "not_found";
     }
+    $values->w = $word1;
     $jsonObj->values = $values;
     $err = curl_error($curl);
     curl_close($curl);
@@ -159,10 +169,10 @@ if ($method == "reportMeaning") {
 }
 
 if ($method == "addWord") {
-    if (isset($word) & isset($meaning) & isset($example)) {
+    if (isset($word) & isset($meaning) & isset($example) & isset($english)) {
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => str_replace ( ' ', '%20',$requestURl . "?m=addWord&w=" . $word . "&a=" . $meaning . "&e=" . $example),
+            CURLOPT_URL => str_replace ( ' ', '%20',$requestURl . "?m=addWord&w=" . $word . "&a=" . $meaning . "&e=" . $example. "&en=" .  $english),
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,

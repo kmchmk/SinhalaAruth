@@ -885,6 +885,16 @@ form.search #theexamplebox {
     width: 99%;
     outline: none;
 }
+form.search #theenglishbox {
+    background: #ffffff  no-repeat scroll 98% 50%;
+    border: 1;
+    border-radius: 5px;
+    font-size: 18px;
+    margin: 0;
+    padding: 4px;
+    width: 99%;
+    outline: none;
+}
 form.search #thesearchbutton {
     background-color: #fff;
     border: 0 none;
@@ -937,15 +947,15 @@ ul.autocomplete {
     top: 171px; left: 84px; width: 67%; display: block;
     /*top: -100px; left: -100px; display: none;*/
 }
-ul.autocomplete>li {
+
+ul.autocomplete>li>a {
     border-top: solid 1px #FFB090;
     display: block;
     font-size: 12px;
-    padding: 3px;
+    padding: 10px;
     text-align: left;
-    cursor: default
 }
-ul.autocomplete>li.selected {
+ul.autocomplete>li>a.selected {
     background-color: #e1e1e1
 }
 #votebox {
@@ -1730,6 +1740,10 @@ div.mctitle a {
         font-size: 21px;
     }
     form.search #theexamplebox {
+        width: 98%;
+        font-size: 21px;
+    }
+    form.search #theenglishbox {
         width: 98%;
         font-size: 21px;
     }
