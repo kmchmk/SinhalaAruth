@@ -30,7 +30,6 @@ if (isset($_GET["en"])) {
 }
 
 
-
 if ($method == "meaning") {
 
         $curl = curl_init();
@@ -170,9 +169,11 @@ if ($method == "reportMeaning") {
 
 if ($method == "addWord") {
     if (isset($word) & isset($meaning) & isset($example) & isset($english)) {
+        $tempURL_spaceRemoved = str_replace ( ' ', '%20',$requestURl . "?m=addWord&w=" . $word . "&a=" . $meaning . "&e=" . $example. "&en=" .  $english);
+        $tempURL_newLineRemoved = str_replace(PHP_EOL, '%0D%0A', $tempURL_spaceRemoved);
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => str_replace ( ' ', '%20',$requestURl . "?m=addWord&w=" . $word . "&a=" . $meaning . "&e=" . $example. "&en=" .  $english),
+            CURLOPT_URL =>  $tempURL_newLineRemoved,//str_replace ( ' ', '%20',$requestURl . "?m=addWord&w=" . $word . "&a=" . $meaning . "&e=" . $example. "&en=" .  $english),
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,

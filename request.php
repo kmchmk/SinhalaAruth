@@ -41,7 +41,7 @@ if ($conn->connect_error) {
 }
 
 if ($method == "meaning") {
-    $sql = 'SELECT meaning.id, english, meaning, example, up, down FROM meaning inner join word on word.id = meaning.wordid where word = ? and report = 0 ORDER BY up DESC';
+    $sql = 'SELECT meaning.id, english, meaning, example, up, down FROM meaning inner join word on word.id = meaning.wordid where word = ? and report = 0 ORDER BY up - down DESC';
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('s', $word);
     $stmt->execute();
@@ -198,6 +198,21 @@ if ($method == "suggestions") {
     $json = json_encode($rows);
     echo $json;
 }
-//echo "error1";
+
+// if ($method == "meaningNotFound") {
+//     $sql = 'SELECT * FROM aruth.word left outer join aruth.meaning on word.id = meaning.wordid order by word.id desc limit 10';
+//     $stmt = $conn->prepare($sql);
+//     $stmt->execute();
+//     $result = $stmt->get_result();
+
+//     $rows = array();
+//     while ($r = mysqli_fetch_assoc($result)) {
+//         $rows[] = $r;
+//     }
+//     $json = json_encode($rows);
+//     echo $json;
+
+// }
+
 ?>
 
