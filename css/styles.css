@@ -3,7 +3,7 @@
     padding: 0
 }
 body a {
-    color: #369;
+    color: #dc0f0f;
     text-decoration: none
 }
 body a:hover,
@@ -65,7 +65,7 @@ div.comments>div.comment>div.head {
     padding: 3px 0 3px 25px
 }
 div.comments>div.comment>div.head>a {
-    color: #369;
+    color: #dc0f0f;
     font-weight: 700;
     text-decoration: none
 }
@@ -101,7 +101,7 @@ div.content {
 }
 div.content dl {
     background-color: #fff;
-    border-bottom: solid 1px #F5DFD6;
+    border-bottom: solid 1px #f89898;
     display: block;
     padding: 4px 0
 }
@@ -124,11 +124,11 @@ div.content dl>dt {
     width: 600px
 }
 div.content dl>dt>a {
-    color: #369;
+    color: #dc0f0f;
     text-decoration: none
 }
 div.content h2 {
-    background-color: #F5DFD6;
+    background-color: #f89898;
     border-bottom: solid 10px #fff;
     border-radius: 10px;
     color: #805B4D;
@@ -144,7 +144,7 @@ div.content p {
     padding: 5px 20px
 }
 div.downlinks {
-    background-color: #F5DFD6;
+    background-color: #f89898;
     border-radius: 10px;
     margin: 20px 0
 }
@@ -156,7 +156,7 @@ div.downlinks>div {
 }
 div.downlinks>dl {
     background-color: #fff;
-    border-bottom: solid 1px #F5DFD6
+    border-bottom: solid 1px #f89898
 }
 div.downlinks>dl>dd {
     background-color: #fff;
@@ -188,7 +188,7 @@ div.downlinks>dl>dt>a>span {
     z-index: 1;
 }
 div.downlinks>dl>dt>a>span.n {
-    color: #369;
+    color: #dc0f0f;
     margin-right: 10px;
     overflow-x: hidden;
     padding-top: 0;
@@ -241,7 +241,7 @@ div.error {
     padding: 10px 30px
 }
 div.files {
-    background-color: #F5DFD6;
+    background-color: #f89898;
     border-radius: 10px;
     clear: right;
     margin: 20px 0
@@ -274,7 +274,7 @@ div.files li.o {
 }
 div.files ul {
     background-color: #fff;
-    border-left: solid 1px #F5DFD6;
+    border-left: solid 1px #f89898;
     font-size: 13px;
     list-style-type: none;
     margin-left: 10px;
@@ -335,7 +335,7 @@ div.help ul {
     padding: 10px 30px
 }
 div.index-stats {
-    background-color: #F5DFD6;
+    background-color: #f89898;
     border-radius: 10px;
     display: block;
     float: left;
@@ -349,7 +349,7 @@ div.index-stats>div {
 }
 div.index-stats>dl {
     background-color: #fff;
-    border-bottom: solid 1px #F5DFD6;
+    border-bottom: solid 1px #f89898;
     display: block;
     float: left;
     width: 50%
@@ -430,7 +430,7 @@ div.note {
     white-space: nowrap
 }
 div.results {
-    background-color: #F5DFD6;
+    background-color: #f89898;
     border-radius: 10px 10px 10px 10px;
     margin: 2px 0;
     min-height: 37px;
@@ -450,7 +450,7 @@ div.results>div>b {
 }
 div.results>dl {
     background-color: #fff;
-    border-bottom: solid 1px #F5DFD6;
+    border-bottom: solid 1px #f89898;
     display: block;
     padding: 2px 0
 }
@@ -506,7 +506,7 @@ div.results>dl>dt {
     width: 1060px;
 }
 div.results>dl>dt>a {
-    color: #369;
+    color: #dc0f0f;
     text-decoration: none
 }
 div.results>h2 {
@@ -596,7 +596,7 @@ div.SemiAcceptableAds {
 }
 div.SemiAcceptableAds>dl {
     background-color: #fff;
-    border-bottom: solid 1px #F5DFD6;
+    border-bottom: solid 1px #f89898;
     display: block;
     padding: 6px 0
 }
@@ -627,7 +627,7 @@ div.SemiAcceptableAds>dl>dt>a {
     font-size: 13px
 }
 div.SemiAcceptableAds>h3 {
-    background: #F5DFD6;
+    background: #f89898;
     border-radius: 5px 5px 0 0;
     color: #805B4D;
     font-size: 16px;
@@ -636,7 +636,7 @@ div.SemiAcceptableAds>h3 {
     padding: 5px 0 5px 20px
 }
 #top {
-    background-color: #369;
+    background-color: #dc0f0f;
     border-radius: 0 0 10px 10px;
     height: 60px
 }
@@ -657,7 +657,7 @@ div.SemiAcceptableAds>h3 {
 }
 #top>h1>a>sup {
     position: absolute;
-    color: #558cb7;
+    color: #ffb7a8;
 }
 #top>ul {
     display: block;
@@ -673,7 +673,7 @@ div.SemiAcceptableAds>h3 {
     height: 60px;
 }
 #top>ul>li>a {
-    background-color: #369;
+    background-color: #dc0f0f;
     color: #fff;
     display: block;
     float: left;
@@ -684,12 +684,12 @@ div.SemiAcceptableAds>h3 {
 }
 #top>ul>li>a:hover {
     background-color: #90B2D5;
-    border-bottom: solid 10px #369;
+    border-bottom: solid 10px #dc0f0f;
     border-radius: 0 0 5px 5px;
     color: #FFF
 }
 div.trackers {
-    background-color: #F5DFD6;
+    background-color: #f89898;
     border-radius: 10px;
     margin: 0 0 0 auto;
     float: right;
@@ -703,7 +703,7 @@ div.trackers>div {
 }
 div.trackers>dl {
     background-color: #fff;
-    border-bottom: solid 1px #F5DFD6;
+    border-bottom: solid 1px #f89898;
     font-size: 11px
 }
 div.trackers>dl>dd {
@@ -728,10 +728,10 @@ div.trackers>dl>dd>span.u {
 }
 div.trackers>dl>dt {
     padding: 3px;
-    color: #369;
+    color: #dc0f0f;
 }
 div.trackers>dl>dt>a {
-    color: #369;
+    color: #dc0f0f;
     text-decoration: none
 }
 div.trackers>h2 {
@@ -830,7 +830,7 @@ form.profile>fieldset>p {
     padding: 10px
 }
 form.search {
-    background-color: #FFB090;
+    background-color: #938ec5;
     border-radius: 10px;
     display: block;
     margin: 20px 0
@@ -910,7 +910,7 @@ form.search #thesearchbutton {
 }
 
 button.thefeedbackbutton {
-    background-color: #ffcccc;
+    background-color: #fdd8d8;
     border-radius: 5px;
     color: #6666ff;
     cursor: pointer;
@@ -938,7 +938,7 @@ p.generic {
 }
 ul.autocomplete {
     background-color: #FFF;
-    border: solid 1px #FFB090;
+    border: solid 1px #938ec5;
     border-radius: 4px;
     list-style-type: none;
     position: absolute;
@@ -949,7 +949,7 @@ ul.autocomplete {
 }
 
 ul.autocomplete>li>a {
-    border-top: solid 1px #FFB090;
+    border-top: solid 1px #938ec5;
     display: block;
     font-size: 12px;
     padding: 10px;
@@ -1699,7 +1699,7 @@ div.mctitle a {
 
     ul.autocomplete {
         background-color: #FFF;
-        border: solid 1px #FFB090;
+        border: solid 1px #938ec5;
         border-radius: 4px;
         list-style-type: none;
         position: absolute;

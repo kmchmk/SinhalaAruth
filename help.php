@@ -48,7 +48,7 @@ $helpURL = "http://" . $path . "/help.php";
                 <p><b>යෝජනා සහ චෝදනා</b></p>
                 <ol>
                     <li>ඔබගේ ගැටළු අප වෙත යොමුකරන්න.</li>
-                    <li>email - <a href="mailto:kmchmk@gmail.com">kmchmk@gmail.com</a></li>
+                    <li>email - <a href="mailto:sinhalaaruth@gmail.com">sinhalaaruth@gmail.com</a></li>
                 </ol>
 
             </div>
