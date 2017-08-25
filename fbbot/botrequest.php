@@ -1,8 +1,10 @@
 <?php
 
-$file = fopen(__DIR__ . '/../config.txt', "r") or die("Unable to open file!");
-$path = fgets($file);
-fclose($file);
+$path = "www.sinhalaaruth.tk";
+
+if($_SERVER['SERVER_NAME'] == "localhost"){
+    $path = "localhost/SinhalaAruth";
+}
 
 $requestURl = "http://" . $path . "/request.php";
 if (isset($_GET["m"])) {
@@ -47,7 +49,7 @@ if ($method == "meaning") {
         ));
 
         $response = curl_exec($curl);
-//echo $response;
+        curl_close($curl);
         $result = json_decode($response);
     
 //for($i = 0; $i < sizeof($result); $i+=3)
@@ -69,9 +71,6 @@ if ($method == "meaning") {
     }
     $values->w = $word1;
     $jsonObj->values = $values;
-    $err = curl_error($curl);
-    curl_close($curl);
-//echo $jsonObj;
     echo json_encode($jsonObj);
 }
 
@@ -94,6 +93,7 @@ if ($method == "voteup") {
         ));
 
         $response = curl_exec($curl);
+        curl_close($curl);
     }
     $values = new stdClass();
     $values->msg = $response;
@@ -124,6 +124,7 @@ if ($method == "votedown") {
         ));
 
         $response = curl_exec($curl);
+        curl_close($curl);
     }
     $values = new stdClass();
     $values->msg = $response;
@@ -155,6 +156,7 @@ if ($method == "reportMeaning") {
         ));
 
         $response = curl_exec($curl);
+        curl_close($curl);
     }
     $values = new stdClass();
     $values->msg = $response;
@@ -186,6 +188,7 @@ if ($method == "addWord") {
         ));
 
         $response = curl_exec($curl);
+        curl_close($curl);
     }
     //echo $response;
     $values = new stdClass();

@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <?php
 
-$file = fopen("config.txt", "r") or die("Unable to open file!");
-$path = fgets($file);
-fclose($file);
+$path = "www.sinhalaaruth.tk";
+
+if($_SERVER['SERVER_NAME'] == "localhost"){
+    $path = "localhost/SinhalaAruth";
+}
+
 
 
 $thisURL = "http://" . $path . "/index.php";

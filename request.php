@@ -22,13 +22,14 @@ if (isset($_GET["en"])) {//phrase
     $english = $_GET["en"];
 }
 
+if ($_SERVER['SERVER_NAME'] == "localhost") {
+    $servername = "localhost";
+} elseif ($_SERVER['SERVER_NAME'] == "www.sinhalaaruth.tk") {
+    $servername = "aruth.c8jqj4lfvkma.us-east-2.rds.amazonaws.com";
+}
 
-
-$file = fopen("servername.txt", "r") or die("Unable to open file!");
-$servername = fgets($file);
-fclose($file);
 $username = "root";
-$password = "1234";
+$password = "aruth1234";
 $dbname = "aruth";
 
 
@@ -204,15 +205,13 @@ if ($method == "suggestions") {
 //     $stmt = $conn->prepare($sql);
 //     $stmt->execute();
 //     $result = $stmt->get_result();
-
 //     $rows = array();
 //     while ($r = mysqli_fetch_assoc($result)) {
 //         $rows[] = $r;
 //     }
 //     $json = json_encode($rows);
 //     echo $json;
-
 // }
-
+$conn->close();
 ?>
 
