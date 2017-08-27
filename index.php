@@ -207,7 +207,7 @@ if (isset($_GET['w'])) {
                     <img  src="img/flag.gif" title="Hi! search something" alt="">
                 </p>
                 <div id="footer">
-                    <br>
+                    <font color="red">මෙහි අඩංගු වචන, තේරුම් සහ ඒවායේ සත්‍යතාව පිළිබඳව අප විසින් වග කියනු නොලැබේ.</font>
                 </div>
             </div> 
         </div>
@@ -493,4 +493,11 @@ if (isset($_GET['w'])) {
 
         </script>
     </body>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-6820956188548770",
+    enable_page_level_ads: true
+  });
+</script>
 </html>

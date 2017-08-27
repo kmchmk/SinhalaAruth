@@ -31,7 +31,7 @@ $helpURL = "http://" . $path . "/help.php";
                 <ol><b><a href="http://www.sinhalaaruth.tk">www.sinhalaaruth.tk</a></b></ol>
                 <p><b>Android Application</b></p>
                 <ol>
-                    <li><b>සිංහල අරුත්</b> ශබ්දකෝෂයේ   <a href="https://www.dropbox.com/sh/6wrgdm25jqetjg9/AAC_BSQOqJhUI3ur0Eyfez8Ga?dl=0" target="_blank"><u><b>Android යෙදුම</b></u></a> ඔබට ලබාගත හැක.</li>
+                    <li><b>සිංහල අරුත්</b> ශබ්දකෝෂයේ   <a href="https://play.google.com/store/apps/details?id=aruth.sinhala.com.aruth" target="_blank"><u><b>Android යෙදුම</b></u></a> ඔබට ලබාගත හැක.</li>
                     <li> සෑම විටම යෙදුම යාවත්කාලීන කොට තබාගන්න..</li>
                 </ol>
                 <p><b>Chat bot</b></p>

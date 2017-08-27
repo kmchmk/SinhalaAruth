@@ -28,7 +28,7 @@ if ($_SERVER['SERVER_NAME'] == "localhost") {
     $servername = "aruth.c8jqj4lfvkma.us-east-2.rds.amazonaws.com";
 }
 
-$username = "root";
+$username = "aruthbot";
 $password = "aruth1234";
 $dbname = "aruth";
 
