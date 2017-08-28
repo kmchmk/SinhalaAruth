@@ -1,26 +1,5 @@
 <?php
 
-if (isset($_GET["m"])) {
-    $method = $_GET["m"];
-}
-if (isset($_GET["w"])) {//word
-    $word = $_GET["w"];
-}
-if (isset($_GET["a"])) {//arthaya
-    $meaning = $_GET["a"];
-}
-if (isset($_GET["e"])) {//example
-    $example = $_GET["e"];
-}
-if (isset($_GET["r"])) {//recordid
-    $recordid = $_GET["r"];
-}
-if (isset($_GET["p"])) {//phrase
-    $phrase = $_GET["p"];
-}
-if (isset($_GET["en"])) {//phrase
-    $english = $_GET["en"];
-}
 
 if ($_SERVER['SERVER_NAME'] == "localhost") {
     $servername = "localhost";
@@ -40,6 +19,31 @@ $conn->set_charset("utf8mb4");
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+
+
+if (isset($_GET["m"])) {
+    $method = strip_tags($_GET["m"]);
+}
+if (isset($_GET["w"])) {//word
+    $word = strip_tags($_GET["w"]);
+}
+if (isset($_GET["a"])) {//arthaya
+    $meaning = strip_tags($_GET["a"]);
+}
+if (isset($_GET["e"])) {//example
+    $example = strip_tags($_GET["e"]);
+}
+if (isset($_GET["r"])) {//recordid
+    $recordid = strip_tags($_GET["r"]);
+}
+if (isset($_GET["p"])) {//phrase
+    $phrase = strip_tags($_GET["p"]);
+}
+if (isset($_GET["en"])) {//phrase
+    $english = strip_tags($_GET["en"]);
+}
+
+
 
 if ($method == "meaning") {
     $sql = 'SELECT meaning.id, english, meaning, example, up, down FROM meaning inner join word on word.id = meaning.wordid where word = ? and report = 0 ORDER BY up - down DESC';
