@@ -149,6 +149,8 @@ if (isset($_GET['w'])) {
                         xmlHttp.send();
                         var message = xmlHttp.responseText;
                         alert(message);
+                        location.reload();
+
                     }
                 }
                 function voteup(recordid, index) {
@@ -493,11 +495,4 @@ if (isset($_GET['w'])) {
 
         </script>
     </body>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<script>
-  (adsbygoogle = window.adsbygoogle || []).push({
-    google_ad_client: "ca-pub-6820956188548770",
-    enable_page_level_ads: true
-  });
-</script>
 </html>

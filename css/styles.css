@@ -101,7 +101,7 @@ div.content {
 }
 div.content dl {
     background-color: #fff;
-    border-bottom: solid 1px #f89898;
+    border-bottom: solid 1px #c6ffcd;
     display: block;
     padding: 4px 0
 }
@@ -128,7 +128,7 @@ div.content dl>dt>a {
     text-decoration: none
 }
 div.content h2 {
-    background-color: #f89898;
+    background-color: #c6ffcd;
     border-bottom: solid 10px #fff;
     border-radius: 10px;
     color: #805B4D;
@@ -144,7 +144,7 @@ div.content p {
     padding: 5px 20px
 }
 div.downlinks {
-    background-color: #f89898;
+    background-color: #c6ffcd;
     border-radius: 10px;
     margin: 20px 0
 }
@@ -156,7 +156,7 @@ div.downlinks>div {
 }
 div.downlinks>dl {
     background-color: #fff;
-    border-bottom: solid 1px #f89898
+    border-bottom: solid 1px #c6ffcd
 }
 div.downlinks>dl>dd {
     background-color: #fff;
@@ -241,7 +241,7 @@ div.error {
     padding: 10px 30px
 }
 div.files {
-    background-color: #f89898;
+    background-color: #c6ffcd;
     border-radius: 10px;
     clear: right;
     margin: 20px 0
@@ -274,7 +274,7 @@ div.files li.o {
 }
 div.files ul {
     background-color: #fff;
-    border-left: solid 1px #f89898;
+    border-left: solid 1px #c6ffcd;
     font-size: 13px;
     list-style-type: none;
     margin-left: 10px;
@@ -335,7 +335,7 @@ div.help ul {
     padding: 10px 30px
 }
 div.index-stats {
-    background-color: #f89898;
+    background-color: #c6ffcd;
     border-radius: 10px;
     display: block;
     float: left;
@@ -349,7 +349,7 @@ div.index-stats>div {
 }
 div.index-stats>dl {
     background-color: #fff;
-    border-bottom: solid 1px #f89898;
+    border-bottom: solid 1px #c6ffcd;
     display: block;
     float: left;
     width: 50%
@@ -430,7 +430,7 @@ div.note {
     white-space: nowrap
 }
 div.results {
-    background-color: #f89898;
+    background-color: #c6ffcd;
     border-radius: 10px 10px 10px 10px;
     margin: 2px 0;
     min-height: 37px;
@@ -450,7 +450,7 @@ div.results>div>b {
 }
 div.results>dl {
     background-color: #fff;
-    border-bottom: solid 1px #f89898;
+    border-bottom: solid 1px #c6ffcd;
     display: block;
     padding: 2px 0
 }
@@ -596,7 +596,7 @@ div.SemiAcceptableAds {
 }
 div.SemiAcceptableAds>dl {
     background-color: #fff;
-    border-bottom: solid 1px #f89898;
+    border-bottom: solid 1px #c6ffcd;
     display: block;
     padding: 6px 0
 }
@@ -627,7 +627,7 @@ div.SemiAcceptableAds>dl>dt>a {
     font-size: 13px
 }
 div.SemiAcceptableAds>h3 {
-    background: #f89898;
+    background: #c6ffcd;
     border-radius: 5px 5px 0 0;
     color: #805B4D;
     font-size: 16px;
@@ -689,7 +689,7 @@ div.SemiAcceptableAds>h3 {
     color: #FFF
 }
 div.trackers {
-    background-color: #f89898;
+    background-color: #c6ffcd;
     border-radius: 10px;
     margin: 0 0 0 auto;
     float: right;
@@ -703,7 +703,7 @@ div.trackers>div {
 }
 div.trackers>dl {
     background-color: #fff;
-    border-bottom: solid 1px #f89898;
+    border-bottom: solid 1px #c6ffcd;
     font-size: 11px
 }
 div.trackers>dl>dd {
