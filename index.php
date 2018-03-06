@@ -34,7 +34,7 @@ if (isset($_GET['w'])) {
             </div>
             <form action="<?php echo $thisURL; ?>" method="get" class="search" id="search">
                 <fieldset>
-                    <input type="text" id="thesinglishbox" onkeyup="convert();suggest()" placeholder="සිංහල/English">
+                    <input type="text" id="thesinglishbox" onkeyup="convert();suggest()" placeholder="සිංහල/English" autocapitalize="off">
                 </fieldset>
                 <fieldset>
                     <input required type="search" name="w" value="<?php echo $word; ?>" id="thesearchbox" placeholder="වචනය කුමක්ද?." autocomplete="off" autofocus="" onkeyup="suggest()">
