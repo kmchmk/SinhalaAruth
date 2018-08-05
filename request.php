@@ -2,13 +2,13 @@
 
 
 if ($_SERVER['SERVER_NAME'] == "localhost") {
-    $servername = "localhost";
+    $password = "1234";
 } elseif ($_SERVER['SERVER_NAME'] == "www.sinhalaaruth.tk") {
-    $servername = "aruth.c8jqj4lfvkma.us-east-2.rds.amazonaws.com";
+    $password = "root";
 }
-
-$username = "aruthbot";
-$password = "aruth1234";
+$servername = "localhost";
+$username = "root";
+$password = "root";
 $dbname = "aruth";
 
 
