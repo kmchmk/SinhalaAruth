@@ -17,7 +17,7 @@ msg
 
 
 Vote down
-http://13.58.202.127/fbbot/botrequest.php?m=voteup&r=<record_id>
+http://13.58.202.127/fbbot/botrequest.php?m=votedown&r=<record_id>
 Reply
 msg
 
